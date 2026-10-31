@@ -1,6 +1,6 @@
 # 技术博客
 
-个人技术博客与作品集，纯静态站点，托管在 GitHub Pages：https://bai265272-rgb.github.io/
+个人技术博客与作品集，纯静态站点，托管在 GitHub Pages：https://baishibo.is-a.dev/
 
 内容是网络工程、Linux 运维与 Kubernetes 的真实实验记录：实训复盘、项目详情与排障笔记。
 

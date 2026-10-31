@@ -2,50 +2,50 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>白士博的技术博客</title>
-    <link>https://bai265272-rgb.github.io/</link>
+    <link>https://baishibo.is-a.dev/</link>
     <description>网络工程、Linux 运维、Kubernetes 与高可用架构的实训记录和排障笔记。</description>
     <language>zh-CN</language>
     <lastBuildDate>Sat, 31 Oct 2026 22:45:00 +0800</lastBuildDate>
-    <atom:link href="https://bai265272-rgb.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://baishibo.is-a.dev/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>项目详情：企业云数据中心运维实训（84 页报告）</title>
-      <link>https://bai265272-rgb.github.io/projects/p1.html</link>
-      <guid isPermaLink="true">https://bai265272-rgb.github.io/projects/p1.html</guid>
+      <link>https://baishibo.is-a.dev/projects/p1.html</link>
+      <guid isPermaLink="true">https://baishibo.is-a.dev/projects/p1.html</guid>
       <pubDate>Sat, 31 Oct 2026 12:00:00 +0800</pubDate>
       <description>84 页实训报告的公开详情页：目录与结构、关键截图（拓扑、OSPF、MySQL 多实例、Zabbix 监控与告警）和一段我做了什么、卡在哪、怎么解的复盘。</description>
     </item>
     <item>
       <title>项目详情：企业网络系统规划与建设实施（45 页报告）</title>
-      <link>https://bai265272-rgb.github.io/projects/p2.html</link>
-      <guid isPermaLink="true">https://bai265272-rgb.github.io/projects/p2.html</guid>
+      <link>https://baishibo.is-a.dev/projects/p2.html</link>
+      <guid isPermaLink="true">https://baishibo.is-a.dev/projects/p2.html</guid>
       <pubDate>Sat, 31 Oct 2026 12:00:00 +0800</pubDate>
       <description>45 页实训报告的公开详情页：目录与结构、关键截图（拓扑、DNS 解析、文件服务、VIP 漂移）和复盘，卡点取自报告总结：DNS 区域文件、防火墙策略与 Keepalived 切换验证。</description>
     </item>
     <item>
       <title>开博：为什么我要在 2026 年认真写技术博客</title>
-      <link>https://bai265272-rgb.github.io/posts/hello-blog.html</link>
-      <guid isPermaLink="true">https://bai265272-rgb.github.io/posts/hello-blog.html</guid>
+      <link>https://baishibo.is-a.dev/posts/hello-blog.html</link>
+      <guid isPermaLink="true">https://baishibo.is-a.dev/posts/hello-blog.html</guid>
       <pubDate>Fri, 30 Oct 2026 09:00:00 +0800</pubDate>
       <description>实训报告写完就躺在硬盘里太可惜了。这个博客想解决三件事：把做过的实验沉淀成能复用的排障手册、倒逼自己把技术讲清楚、给未来的面试官一个比简历更立体的我。</description>
     </item>
     <item>
       <title>离线部署 Kubernetes 双节点集群，我踩的 3 个坑</title>
-      <link>https://bai265272-rgb.github.io/posts/kubernetes-offline-3-pits.html</link>
-      <guid isPermaLink="true">https://bai265272-rgb.github.io/posts/kubernetes-offline-3-pits.html</guid>
+      <link>https://baishibo.is-a.dev/posts/kubernetes-offline-3-pits.html</link>
+      <guid isPermaLink="true">https://baishibo.is-a.dev/posts/kubernetes-offline-3-pits.html</guid>
       <pubDate>Fri, 30 Oct 2026 09:00:00 +0800</pubDate>
       <description>VMware + CentOS 7.6、无外网环境下用 kubeadm 离线部署双节点集群。时间不同步、swap 没关、IP 转发没开——三个坑依次爆出来，又依次被填平的全过程。</description>
     </item>
     <item>
       <title>Nginx + Keepalived + HAProxy 高可用实测：停掉主节点之后发生了什么</title>
-      <link>https://bai265272-rgb.github.io/posts/nginx-keepalived-haproxy-ha.html</link>
-      <guid isPermaLink="true">https://bai265272-rgb.github.io/posts/nginx-keepalived-haproxy-ha.html</guid>
+      <link>https://baishibo.is-a.dev/posts/nginx-keepalived-haproxy-ha.html</link>
+      <guid isPermaLink="true">https://baishibo.is-a.dev/posts/nginx-keepalived-haproxy-ha.html</guid>
       <pubDate>Fri, 30 Oct 2026 09:00:00 +0800</pubDate>
       <description>高可用不能靠配置写完了来自我感动，得真停服务验证。这篇记录 VIP 漂移、HAProxy 自动摘除故障后端的完整验证过程和关键参数。</description>
     </item>
     <item>
       <title>企业网络实训复盘：从 VLAN 规划到防火墙安全策略</title>
-      <link>https://bai265272-rgb.github.io/posts/enterprise-network-training.html</link>
-      <guid isPermaLink="true">https://bai265272-rgb.github.io/posts/enterprise-network-training.html</guid>
+      <link>https://baishibo.is-a.dev/posts/enterprise-network-training.html</link>
+      <guid isPermaLink="true">https://baishibo.is-a.dev/posts/enterprise-network-training.html</guid>
       <pubDate>Fri, 30 Oct 2026 09:00:00 +0800</pubDate>
       <description>一套能对外提供服务的企业网络是怎么搭出来的：核心—接入组网、VLAN 10/20 广播隔离、USG6000V1 安全域与 NAT、主从 DNS 和文件服务的完整链路复盘。</description>
     </item>
