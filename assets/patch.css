@@ -30,3 +30,17 @@ article.post p,article.post li{max-width:42em}
   /* 宽表格在小屏上横向滚动，不再硬挤列宽 */
   table{display:block;overflow-x:auto;white-space:nowrap}
 }
+
+/* 卡片标题降为 h3 后的等效样式（标题层级整改） */
+.post-card h3{margin:0 0 6px;font-size:21px;line-height:1.4}
+.post-card h3 a{color:var(--ink)}
+.post-card h3 a:hover{color:var(--accent);text-decoration:none}
+
+/* 首页标签去按钮化：纯文本 + # 前缀，不再假装可点 */
+.tag{background:none;color:var(--muted);padding:2px 8px 2px 0;font-size:13.5px}
+.tag::before{content:"#";color:var(--accent);margin-right:2px}
+
+/* 作品集图片可点开看大图 */
+.post-card figure a{display:block}
+.post-card figure a img{transition:opacity .15s ease}
+.post-card figure a:hover img{opacity:.92}
