@@ -69,7 +69,18 @@
 
     <p>客户现场和实验室里经常没有外网，Kubernetes 部署就必须走离线路线。这次实训的环境是 VMware + CentOS 7.6，通过 SFTP 把镜像和离线包传进去、搭本地 YUM 源，再用 kubeadm 拉起一个双节点集群。流程本身不复杂，但三个坑依次爆出来，个个都是“文档里一笔带过、现场能卡你半天”的类型。</p>
 
-    <h2>环境</h2>
+        <nav class="toc" aria-label="本文目录">
+      <strong>本文目录</strong>
+      <ol>
+        <li><a href="#sec-1">环境</a></li>
+        <li><a href="#sec-2">坑一：时间不同步，kubeadm 初始化直接失败</a></li>
+        <li><a href="#sec-3">坑二：swap 没关，节点 NotReady</a></li>
+        <li><a href="#sec-4">坑三：IP 转发没开，跨节点 Pod 不通</a></li>
+        <li><a href="#sec-5">最终状态</a></li>
+      </ol>
+    </nav>
+
+<h2 id="sec-1">环境</h2>
     <table>
       <tr><th>角色</th><th>IP</th><th>说明</th></tr>
       <tr><td>Master</td><td>192.168.177.131</td><td>控制平面：etcd、apiserver、controller-manager、scheduler</td></tr>
@@ -77,34 +88,57 @@
     </table>
     <p>容器运行时为 Docker 18.09.6，集群组件为 kubeadm / kubelet / kubectl，全部来自本地离线包与自建 YUM 源。</p>
 
-    <h2>坑一：时间不同步，kubeadm 初始化直接失败</h2>
+    <h2 id="sec-2">坑一：时间不同步，kubeadm 初始化直接失败</h2>
     <p><strong>现象：</strong>执行 <code>kubeadm init</code> 时证书校验报错，初始化中断。排查一圈才发现两台虚拟机的时间差了好几分钟——离线环境没有外网 NTP，虚拟机时钟漂移没人管，而证书校验对时间非常敏感。</p>
     <p><strong>解法：</strong>部署 chrony，把 Master 设为本地时间源、Node 向它同步，并设为开机自启。之后所有涉及证书的部署（包括后面的集群组件），我都会先确认时间同步再动手。</p>
     <pre><code># 两台机器统一时间源后验证
 chronyc tracking
 date   # 确认双节点时间一致再执行 kubeadm init</code></pre>
 
-    <h2>坑二：swap 没关，节点 NotReady</h2>
+    <figure><a href="../assets/img/p5-chrony.jpg" target="_blank" rel="noopener"><img src="../assets/img/p5-chrony.webp" alt="chronyc sources -v 输出：多个 NTP 源可达、已同步（源地址已打码）" loading="lazy" width="707" height="327"></a><figcaption>坑一的证据：chrony 与多个 NTP 源完成同步后，kubeadm 初始化不再因时间问题失败（源地址已打码）</figcaption></figure>
+
+    <h2 id="sec-3">坑二：swap 没关，节点 NotReady</h2>
     <p><strong>现象：</strong>Node 加入集群后状态迟迟不是 Ready，kubelet 日志反复异常。原因是 CentOS 默认开启的 swap 没有关——kubelet 的设计假设就是宿主机不使用 swap，检测到 swap 开着会直接拒绝正常工作。</p>
     <p><strong>解法：</strong>临时关闭不够，必须永久关闭：注释掉 <code>/etc/fstab</code> 里的 swap 行，重启后验证。</p>
     <pre><code>swapoff -a
 sed -i.bak '/swap/s/^/#/' /etc/fstab
 free -m   # 重启后确认 swap 为 0</code></pre>
 
-    <h2>坑三：IP 转发没开，跨节点 Pod 不通</h2>
+    <h2 id="sec-4">坑三：IP 转发没开，跨节点 Pod 不通</h2>
     <p><strong>现象：</strong>两个节点都是 Ready 了，但 Pod 跨节点通信不通，网络插件工作不正常。根源是内核的 IP 转发没有开启，节点不会替 Pod 流量做转发。</p>
     <p><strong>解法：</strong>把参数写入 <code>sysctl.conf</code> 永久生效，而不是只用 <code>sysctl -w</code> 临时改——临时改重启就没，这类“重启后复发”的问题在运维里最坑人。</p>
     <pre><code>echo 'net.ipv4.ip_forward = 1' >> /etc/sysctl.conf
 sysctl -p
 sysctl net.ipv4.ip_forward   # 输出 1 才算生效</code></pre>
 
-    <h2>最终状态</h2>
+    <figure><a href="../assets/img/p5-ipvs.jpg" target="_blank" rel="noopener"><img src="../assets/img/p5-ipvs.webp" alt="lsmod 输出显示 ip_vs 及 ip_vs_rr、ip_vs_wrr、ip_vs_sh 模块已加载" loading="lazy" width="707" height="150"></a><figcaption>坑三的证据：IPVS 内核模块加载齐全，跨节点 Pod 网络恢复通畅</figcaption></figure>
+
+    <h2 id="sec-5">最终状态</h2>
     <p>三个坑填平后，两节点均为 Ready，etcd、kube-apiserver、kube-controller-manager、kube-scheduler 等核心组件运行正常。</p>
 
     <div class="note"><strong>复盘一句话：</strong>离线部署 K8s 的前置检查清单应该固定下来——时间同步（chrony）、关 swap、关防火墙与 SELinux、开 IP 转发、加载 IPVS 模块。这五项在 <code>kubeadm init</code> 之前逐项打勾，能省掉绝大部分“玄学故障”。</div>
 
     <a class="back" href="../index.html">← 返回文章列表</a>
-  </article>
+      <nav class="post-nav" aria-label="文章导航">
+      <div class="post-nav-links">
+        <a class="prev" href="hello-blog.html">← 上一篇：开博：为什么我要在 2026 年认真写技术博客</a>
+        <a class="next" href="nginx-keepalived-haproxy-ha.html">下一篇：Nginx + Keepalived + HAProxy 高可用实测：停掉主节点之后发生了什么 →</a>
+      </div>
+      <div class="related">
+        <strong>相关阅读</strong>
+        <ul>
+        <li><a href="nginx-keepalived-haproxy-ha.html">Nginx + Keepalived + HAProxy 高可用实测</a></li>
+        <li><a href="../portfolio.html#p5">作品集：Kubernetes 双节点集群离线部署</a></li>
+        </ul>
+      </div>
+      <p class="updated">最后更新于 2026-10-31</p>
+    </nav>
+    <div class="author-card">
+      <div class="author-name">白士博</div>
+      <p>2027 届网络工程本科在读，持 H3CNE-RS+ 与 H3CSE-RS-RT 双认证。这里只写自己真正动手做过的东西。</p>
+      <p><a href="../about.html">关于我</a> · <a href="../portfolio.html">作品集</a> · <a href="https://github.com/bai265272-rgb" target="_blank" rel="noopener">GitHub</a></p>
+    </div>
+</article>
 </main>
 
 <footer class="site">

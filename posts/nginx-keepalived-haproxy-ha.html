@@ -69,7 +69,17 @@
 
     <p>高可用架构最忌讳的就是“配置写完 = 高可用达成”。VIP 会不会漂移、后端挂了流量会不会还往死节点上打，只有真的把服务停掉才能知道答案。这篇记录我在云数据中心运维实训里搭的这套架构和它的完整故障验证过程。</p>
 
-    <h2>架构分工</h2>
+        <nav class="toc" aria-label="本文目录">
+      <strong>本文目录</strong>
+      <ol>
+        <li><a href="#sec-1">架构分工</a></li>
+        <li><a href="#sec-2">验证一：停掉主节点的 Keepalived</a></li>
+        <li><a href="#sec-3">验证二：停掉一台后端 Nginx</a></li>
+        <li><a href="#sec-4">顺带一提：同实训里的数据隔离</a></li>
+      </ol>
+    </nav>
+
+<h2 id="sec-1">架构分工</h2>
     <table>
       <tr><th>组件</th><th>职责</th></tr>
       <tr><td>Keepalived</td><td>维护虚拟 IP（VIP）192.168.36.200，主节点故障时把 VIP 漂移到备节点</td></tr>
@@ -78,23 +88,46 @@
     </table>
     <p>HAProxy 的健康检查参数用的是 <code>inter 2000 fall 3 rise 2</code>：每 2 秒检查一次，连续 3 次失败判定后端下线，连续 2 次成功才重新上线。这个参数组合的意思是“宁可慢一点摘除，也不要因为一次网络抖动就误杀后端”。</p>
 
-    <h2>验证一：停掉主节点的 Keepalived</h2>
+    <h2 id="sec-2">验证一：停掉主节点的 Keepalived</h2>
     <p><strong>操作：</strong>在主节点上停止 Keepalived 服务，持续访问 VIP 提供的 Web 服务。</p>
     <p><strong>结果：</strong>VIP 自动漂移到备节点，Web 访问短暂波动后恢复，用户侧感知不到节点已经换了一台。如果漂移失败，VIP 会成为一个谁都不响应的地址，整个验证的意义就在这里——不停一次，你永远不知道漂移脚本和优先级配置到底对不对。</p>
 
-    <h2>验证二：停掉一台后端 Nginx</h2>
+    <figure><a href="../assets/img/p3-vip-failover.jpg" target="_blank" rel="noopener"><img src="../assets/img/p3-vip-failover.webp" alt="停止 master1 的 Keepalived 后三台节点同时监视 VIP 的时间线：3 秒漂移、11 秒回切" loading="lazy" width="804" height="428"></a><figcaption>验证一的证据：停掉主节点 Keepalived 后，VIP 在约 3 秒内漂移到备节点</figcaption></figure>
+
+    <h2 id="sec-3">验证二：停掉一台后端 Nginx</h2>
     <p><strong>操作：</strong>保持 VIP 不动，单独停止其中一台后端的 Nginx。</p>
     <p><strong>结果：</strong>HAProxy 在健康检查连续失败达到阈值后自动摘除该后端，后续请求全部由存活后端承接，没有出现 502 也没有把请求继续打给已停的服务。恢复这台 Nginx 后，连续检查成功，它又被自动加回轮询。</p>
 
     <div class="warn"><strong>容易漏的一步：</strong>验证做完一定要把服务恢复、再确认一遍 VIP 归属和后端状态。实训环境无所谓，生产环境里“测完忘了恢复”本身就是一次事故。</div>
 
-    <h2>顺带一提：同实训里的数据隔离</h2>
+    <figure><a href="../assets/img/p1-haproxy-stats.jpg" target="_blank" rel="noopener"><img src="../assets/img/p1-haproxy-stats.webp" alt="HAProxy 状态页局部：一台后端显示 DOWN（L4CON），其余两台 UP（L7OK/200）" loading="lazy" width="852" height="118"></a><figcaption>验证二的证据：故障后端被 HAProxy 自动摘除（DOWN），其余后端正常（L7OK/200）</figcaption></figure>
+
+    <h2 id="sec-4">顺带一提：同实训里的数据隔离</h2>
     <p>这套环境里 MySQL 用了多实例部署：3307 / 3308 两个实例各自独立的 socket 与数据目录，在同一台机器上实现业务数据隔离和独立启停。思路和上面一脉相承——隔离边界先划清楚，故障才不会互相传染。</p>
 
     <div class="note"><strong>复盘一句话：</strong>高可用的交付标准不是配置文件，而是故障验证记录：停什么、多久恢复、用户侧现象如何，三项写全了才算做完。</div>
 
     <a class="back" href="../index.html">← 返回文章列表</a>
-  </article>
+      <nav class="post-nav" aria-label="文章导航">
+      <div class="post-nav-links">
+        <a class="prev" href="kubernetes-offline-3-pits.html">← 上一篇：离线部署 Kubernetes 双节点集群，我踩的 3 个坑</a>
+        <a class="next" href="enterprise-network-training.html">下一篇：企业网络实训复盘：从 VLAN 规划到防火墙安全策略 →</a>
+      </div>
+      <div class="related">
+        <strong>相关阅读</strong>
+        <ul>
+        <li><a href="kubernetes-offline-3-pits.html">离线部署 Kubernetes 双节点集群，我踩的 3 个坑</a></li>
+        <li><a href="../portfolio.html#p3">作品集：三节点控制平面高可用集群</a></li>
+        </ul>
+      </div>
+      <p class="updated">最后更新于 2026-10-31</p>
+    </nav>
+    <div class="author-card">
+      <div class="author-name">白士博</div>
+      <p>2027 届网络工程本科在读，持 H3CNE-RS+ 与 H3CSE-RS-RT 双认证。这里只写自己真正动手做过的东西。</p>
+      <p><a href="../about.html">关于我</a> · <a href="../portfolio.html">作品集</a> · <a href="https://github.com/bai265272-rgb" target="_blank" rel="noopener">GitHub</a></p>
+    </div>
+</article>
 </main>
 
 <footer class="site">
