@@ -145,6 +145,7 @@
         <li>源码编译 Nginx + Keepalived 实现 VIP 漂移，HAProxy 做轮询分发与健康检查；实测停主节点后 VIP 漂移到备节点、停后端后故障节点被自动摘除</li>
         <li>Zabbix 采集 Web / MySQL / 主机性能，配置自定义监控项与邮件告警并完成告警测试；FreeVM 平台完成虚拟机创建、集群组建与在线迁移，迁移期间业务不中断</li>
       </ul>
+      <p class="rel-article">项目详情：<a href="projects/p1.html">报告目录、关键截图与复盘</a></p>
       <figure><a href="assets/img/p1-topology.jpg" target="_blank" rel="noopener"><img width="1280" height="801" src="assets/img/p1-topology.webp" alt="企业云数据中心网络拓扑图：双路由器、双防火墙、核心与汇聚交换机及四个 VLAN 的终端（地址标注已打码）" loading="lazy"></a><figcaption>实训拓扑全貌：双防火墙 HRP + 三层组网，终端分 VLAN 10 / 20 / 30 / 40（地址标注已打码）</figcaption></figure>
       <figure><a href="assets/img/p1-haproxy-stats.jpg" target="_blank" rel="noopener"><img width="852" height="118" src="assets/img/p1-haproxy-stats.webp" alt="HAProxy 状态页局部：一台后端显示 DOWN（L4CON），其余两台 UP（L7OK/200）" loading="lazy"></a><figcaption>HAProxy 健康检查：故障后端被自动摘除（23s DOWN），其余节点正常（L7OK/200）</figcaption></figure>
       <p class="rel-article">相关文章：<a href="posts/nginx-keepalived-haproxy-ha.html">Nginx + Keepalived + HAProxy 高可用实测：停掉主节点之后发生了什么</a></p>
