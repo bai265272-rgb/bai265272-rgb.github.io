@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>企业网络系统规划与建设实施 · 项目详情 — 白士博的技术博客</title>
+<meta name="description" content="企业网络系统规划与建设实施的项目详情页：45 页实训报告的目录与结构、关键实施截图（网络拓扑、DNS 解析、NFS 文件服务、Keepalived VIP 漂移），以及一段我做了什么、卡在哪、怎么解的复盘。">
+<link rel="canonical" href="https://bai265272-rgb.github.io/projects/p2.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="白士博的技术博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="企业网络系统规划与建设实施 · 项目详情 | 白士博">
+<meta property="og:description" content="45 页实训报告的目录、关键截图与复盘：VLAN 规划、防火墙安全策略、DNS 主从、文件服务与 Web 高可用。">
+<meta property="og:url" content="https://bai265272-rgb.github.io/projects/p2.html">
+<meta property="og:image" content="https://bai265272-rgb.github.io/assets/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="企业网络系统规划与建设实施 · 项目详情 | 白士博">
+<meta name="twitter:description" content="45 页实训报告的目录、关键截图与复盘：VLAN 规划、防火墙安全策略、DNS 主从、文件服务与 Web 高可用。">
+<meta name="twitter:image" content="https://bai265272-rgb.github.io/assets/og-default.png">
+<meta property="article:published_time" content="2026-10-30T09:00:00+08:00">
+<link rel="alternate" type="application/rss+xml" title="白士博的技术博客 RSS" href="../feed.xml">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "企业网络系统规划与建设实施",
+  "url": "https://bai265272-rgb.github.io/projects/p2.html",
+  "inLanguage": "zh-CN",
+  "author": {
+    "@type": "Person",
+    "name": "白士博",
+    "url": "https://bai265272-rgb.github.io/about.html",
+    "sameAs": [
+      "https://github.com/bai265272-rgb"
+    ]
+  },
+  "description": "45 页课程实训报告的公开详情页：目录与结构、关键实施截图和复盘。涵盖 VLAN/MSTP/VRRP/DHCP 组网、USG 防火墙安全域与 NAT、DNS 主从、FTP/Samba/NFS 文件服务、Nginx/LAMP 与 Keepalived 双机热备及运维脚本。",
+  "image": "https://bai265272-rgb.github.io/assets/og-default.png"
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到正文</a>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">baishibo<span>.blog</span></a>
+    <nav class="main">
+      <a href="../index.html" aria-current="page">文章</a>
+      <a href="../portfolio.html" aria-current="page">作品集</a>
+      <a href="../about.html">关于我</a>
+      <a href="https://github.com/bai265272-rgb" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+  <article class="post">
+    <a class="back" href="../portfolio.html#p2">← 返回作品集</a>
+    <h1>企业网络系统规划与建设实施</h1>
+    <p class="meta">课程实训 · 45 页报告 · 独立完成</p>
+
+    <p>一次完整的企业网交付：先做园区网络（VLAN 规划、生成树、网关冗余、地址自动分配），再用防火墙划分安全域、做 NAT 与访问控制，最后在 Linux 上把 DNS、文件服务、网站和运维脚本一整套服务立起来。这个项目的完整版复盘我写成了博客文章：<a href="../posts/enterprise-network-training.html">企业网络实训复盘：从 VLAN 规划到防火墙安全策略</a>；这一页放报告目录、关键截图和一段简版复盘，作为"45 页报告"的证据。</p>
+
+    <h2 id="sec-1">报告目录与结构</h2>
+        <figure><a href="../assets/img/p2-toc.jpg" target="_blank" rel="noopener"><img src="../assets/img/p2-toc.webp" alt="实训报告目录页（两页拼接）：五章结构，末页为第 45 页" width="1223" height="2426" loading="lazy"></a><figcaption>报告目录（原报告两页目录拼接）。五章结构，实施章占第 6–40 页，测试章有五组测试，总结落在第 45 页。</figcaption></figure>
+    <table>
+      <thead><tr><th>部分</th><th>内容</th><th>页码</th></tr></thead>
+      <tbody>
+        <tr><td>一、项目介绍</td><td>背景、需求、目标</td><td>3–4</td></tr>
+        <tr><td>二、项目设计方案</td><td>项目拓扑图、IP 地址规划表</td><td>5</td></tr>
+        <tr><td>三、项目实施</td><td>网络搭建（6–12）；Linux 系统部署（13）；DNS 服务器部署（13–17）；文件服务器部署（18–26）；Web 服务器部署（27–35）；系统运维脚本（36–40）</td><td>6–40</td></tr>
+        <tr><td>四、项目测试及结果展示</td><td>网络测试、域名解析测试、文件服务测试、网站测试、运维脚本测试</td><td>41–45</td></tr>
+        <tr><td>五、项目总结</td><td>收获与不足</td><td>45</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="sec-2">关键截图</h2>
+        <figure><a href="../assets/img/p2-topology.jpg" target="_blank" rel="noopener"><img src="../assets/img/p2-topology.webp" alt="企业网络拓扑：防火墙划分 trust/untrust 区、核心与接入交换机、无线 AC/AP 与终端" width="1280" height="765" loading="lazy"></a><figcaption>实训拓扑（地址标注已打码）：FW1 划分 trust / untrust 安全域，下接核心、接入与无线 AC/AP。</figcaption></figure>
+        <figure><a href="../assets/img/p2-dns.jpg" target="_blank" rel="noopener"><img src="../assets/img/p2-dns.webp" alt="DNS 正向解析测试：nslookup www.linuxprobe.com 返回 192.168.36.130" width="947" height="469" loading="lazy"></a><figcaption>DNS 正向解析验证：客户端把 nameserver 指向主 DNS 后，nslookup www.linuxprobe.com 正确返回 192.168.36.130。</figcaption></figure>
+        <figure><a href="../assets/img/p2-nfs.jpg" target="_blank" rel="noopener"><img src="../assets/img/p2-nfs.webp" alt="文件服务器上 NFS 服务进程运行状态" width="926" height="232" loading="lazy"></a><figcaption>文件服务验证：NFS 服务端进程齐全在跑。文件服务这一章把 FTP（匿名 / 本地 / 虚拟用户三种认证）、Samba、NFS 都逐项做了登录、上传与挂载验证。</figcaption></figure>
+        <figure><a href="../assets/img/p2-vip.jpg" target="_blank" rel="noopener"><img src="../assets/img/p2-vip.webp" alt="备机 lb02 上出现 VIP 192.168.137.100（secondary 地址）" width="749" height="107" loading="lazy"></a><figcaption>Keepalived 主备切换验证：停掉主节点后，备机 lb02 的 ens160 上出现 VIP 192.168.137.100（secondary），漂移成功。</figcaption></figure>
+        <figure><a href="../assets/img/p2-nginx-dynamic.jpg" target="_blank" rel="noopener"><img src="../assets/img/p2-nginx-dynamic.webp" alt="动态服务器页面：PHP 与 MySQL 连接成功" width="858" height="564" loading="lazy"></a><figcaption>Web 服务验证：Nginx 反向代理轮询分发到静态 / 动态两台后端，动态页面的 PHP 与 MySQL 连接测试通过。</figcaption></figure>
+
+    <h2 id="sec-3">复盘：我做了什么、卡在哪、怎么解的</h2>
+    <p><strong>做了什么。</strong>分三层推进：网络层按部门与功能划 VLAN，MSTP 防环、VRRP 做双网关冗余、DHCP 自动分配地址，出口 USG 防火墙划分 trust / untrust 安全域并配安全策略与 NAT；服务层在 Linux 上部署主从 DNS（正反向解析 + 区域同步）、文件服务全家桶（FTP 三种认证模式、Samba、NFS）、Nginx 反向代理加 LAMP 动态站，并用 Keepalived 做双机热备；最后写了两个运维脚本——服务自愈（检测到 Nginx 停止自动重启）和 LAMP 一键部署。五组测试（网络 / 域名解析 / 文件服务 / 网站 / 运维脚本）逐项留了结果。</p>
+    <p><strong>卡点一：DNS 是两层坑。</strong>第一层是 named.conf 的默认口径：listen-on 只听 127.0.0.1、allow-query 只允许 localhost，结果本机解析一切正常、别的机器全军覆没——报告里原样记了这两行从默认值改成 any 的过程。第二层是区域文件的准确性：正反向区域文件里的 SOA、序列号和每条记录都得对得上，主从同步靠序列号递增触发，文件写错一处，从服务器同步过来的就是错的。这一章让我对"配置即契约"有了实感。</p>
+    <p><strong>卡点二：防火墙策略要精细调整。</strong>分了安全域之后，所有跨域访问都变成逐条放行：范围给大了等于没分域，给小了服务就过不去。调试方法是分段定位——先在内网把服务本身测通，再过一遍防火墙测，确认问题出在策略而不是服务；策略按"最小放行"逐条加，每加一条就复测一次。这也是报告总结里我写下的三个挑战之一。</p>
+    <p><strong>卡点三：Keepalived 切换必须实测。</strong>主备都显示进程在跑，不等于切换真的可用。验证方法是硬停主节点的 Keepalived，再到备机上 ip addr 确认 VIP（192.168.137.100）以 secondary 地址出现、前端访问不中断（见上方截图）。另外还配了服务自愈脚本做第二层兜底：进程级故障先自愈，节点级故障再漂移。</p>
+    <p><strong>一句话总结。</strong>企业网交付的特点是牵一发动全身：网络、安全、服务三层互相咬合，唯一的办法是按层施工、逐项测试、每一步都留证据。</p>
+
+    <h2 id="sec-4">关于完整报告</h2>
+    <p>完整报告包含实验环境的地址规划与设备配置全文，不在网上公开。需要查阅的话，可以在面试时当面屏幕共享展示；也可以先通过<a href="../about.html">关于我</a>页面的邮箱联系我说明用途。</p>
+
+    <p class="updated">最后更新于 2026-10-31</p>
+
+    <div class="author-card">
+      <div class="author-name">白士博</div>
+      <p>2027 届网络工程本科在读，持 H3CNE-RS+ 与 H3CSE-RS-RT 双认证。这里只写自己真正动手做过的东西。</p>
+      <p><a href="../about.html">关于我</a> · <a href="../portfolio.html">作品集</a> · <a href="https://github.com/bai265272-rgb" target="_blank" rel="noopener">GitHub</a></p>
+    </div>
+</article>
+</main>
+
+<footer class="site">
+  <div class="wrap">© 2026 白士博 · 网络工程 / 云运维 · 石家庄<br><a class="rss" href="/feed.xml">RSS 订阅</a></div>
+</footer>
+</body>
+</html>
