@@ -1,31 +1,19 @@
 # 白士博的技术博客
 
-纯静态博客，无构建工具、无外部依赖。直接部署到 GitHub Pages / Cloudflare Pages 即可。
+个人技术博客与作品集，纯静态站点，托管在 GitHub Pages：https://bai265272-rgb.github.io/
 
-## 目录
+内容是网络工程、Linux 运维与 Kubernetes 的真实实验记录：课堂实验周记、实训复盘与项目详情。
 
-- `index.html` — 首页（作品集精选 + 文章列表）
-- `portfolio.html` — 作品集（2 段课程实训 + 6 份云平台/集群实验）
-- `about.html` — 关于我
-- `posts/` — 文章页（开博文、Kubernetes 离线部署踩坑、Nginx+Keepalived+HAProxy 高可用、企业网络实训复盘）
-- `assets/style.css` — 全站样式
-- `domain-application/` — is-a.dev 与 eu.org 的申请材料（文件已备好）
+## 目录结构
 
-## 部署到 GitHub Pages（用日常号 bai265272-rgb）
-
-1. 新建公开仓库，仓库名必须是 `bai265272-rgb.github.io`
-2. 把本目录除 `domain-application/` 以外的文件上传到仓库根目录
-   （index.html 必须在根目录）
-3. 仓库 Settings → Pages → Source 选 `Deploy from a branch`，分支 `main`、目录 `/ (root)`
-4. 等 1–2 分钟，访问 https://bai265272-rgb.github.io/ 确认打开
-5. 之后按 `domain-application/README.md` 提交 is-a.dev 申请
+- `index.html` / `about.html` / `portfolio.html` — 首页、关于、作品集
+- `posts/` — 博客文章
+- `projects/` — 项目详情页（报告目录、关键截图与复盘）
+- `assets/` — 全站样式与图片（图片使用 WebP）
+- `feed.xml` / `sitemap.xml` — RSS 订阅与站点地图
 
 ## 新增一篇文章
 
-1. 复制一篇现有 posts/*.html，改标题、日期和正文
-2. 在 index.html 的文章列表里加一张卡片，链接指向新文件
-3. 提交到仓库即可，GitHub Pages 会自动更新
-
-## 隐私约定
-
-本站不公开手机号和证书编号；公开联系方式只有求职邮箱和 GitHub。
+1. 在 `posts/` 下新建 HTML，套用现有文章页的结构（导航、正文、作者卡）
+2. 在首页文章区、`feed.xml`、`sitemap.xml` 中各加一条
+3. 图片放 `assets/img/`，正文引用与点击大图都指向 WebP 文件

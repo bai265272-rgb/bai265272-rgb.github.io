@@ -146,8 +146,8 @@
         <li>Zabbix 采集 Web / MySQL / 主机性能，配置自定义监控项与邮件告警并完成告警测试；FreeVM 平台完成虚拟机创建、集群组建与在线迁移，迁移期间业务不中断</li>
       </ul>
       <p class="rel-article">项目详情：<a href="projects/p1.html">报告目录、关键截图与复盘</a></p>
-      <figure><a href="assets/img/p1-topology.jpg" target="_blank" rel="noopener"><img width="1280" height="801" src="assets/img/p1-topology.webp" alt="企业云数据中心网络拓扑图：双路由器、双防火墙、核心与汇聚交换机及四个 VLAN 的终端（地址标注已打码）" loading="lazy"></a><figcaption>实训拓扑全貌：双防火墙 HRP + 三层组网，终端分 VLAN 10 / 20 / 30 / 40（地址标注已打码）</figcaption></figure>
-      <figure><a href="assets/img/p1-haproxy-stats.jpg" target="_blank" rel="noopener"><img width="852" height="118" src="assets/img/p1-haproxy-stats.webp" alt="HAProxy 状态页局部：一台后端显示 DOWN（L4CON），其余两台 UP（L7OK/200）" loading="lazy"></a><figcaption>HAProxy 健康检查：故障后端被自动摘除（23s DOWN），其余节点正常（L7OK/200）</figcaption></figure>
+      <figure><a href="assets/img/p1-topology.webp" target="_blank" rel="noopener"><img width="1280" height="801" src="assets/img/p1-topology.webp" alt="企业云数据中心网络拓扑图：双路由器、双防火墙、核心与汇聚交换机及四个 VLAN 的终端（地址标注已打码）" loading="lazy"></a><figcaption>实训拓扑全貌：双防火墙 HRP + 三层组网，终端分 VLAN 10 / 20 / 30 / 40（地址标注已打码）</figcaption></figure>
+      <figure><a href="assets/img/p1-haproxy-stats.webp" target="_blank" rel="noopener"><img width="852" height="118" src="assets/img/p1-haproxy-stats.webp" alt="HAProxy 状态页局部：一台后端显示 DOWN（L4CON），其余两台 UP（L7OK/200）" loading="lazy"></a><figcaption>HAProxy 健康检查：故障后端被自动摘除（23s DOWN），其余节点正常（L7OK/200）</figcaption></figure>
       <p class="rel-article">相关文章：<a href="posts/nginx-keepalived-haproxy-ha.html">Nginx + Keepalived + HAProxy 高可用实测：停掉主节点之后发生了什么</a></p>
     </div>
 
@@ -166,8 +166,8 @@
         <li>Nginx 反向代理轮询分发 + Keepalived 双机热备对外提供服务；另编写了服务自愈脚本（检测到 Nginx 停止自动重启）和 LAMP 环境一键部署脚本</li>
       </ul>
       <p class="rel-article">项目详情：<a href="projects/p2.html">报告目录、关键截图与复盘</a></p>
-      <figure><a href="assets/img/p2-topology.jpg" target="_blank" rel="noopener"><img width="1280" height="765" src="assets/img/p2-topology.webp" alt="企业网络拓扑图：防火墙划分 trust/untrust 区、核心与接入交换机、无线 AC/AP 与终端（地址标注已打码）" loading="lazy"></a><figcaption>实训拓扑：FW1 划分 trust / untrust 安全域，下接核心、接入与无线（地址标注已打码）</figcaption></figure>
-      <figure><a href="assets/img/p2-nginx-dynamic.jpg" target="_blank" rel="noopener"><img width="858" height="564" src="assets/img/p2-nginx-dynamic.webp" alt="浏览器访问动态服务器页面显示连接成功（地址已打码），另一标签页为 MySQL 连接测试页" loading="lazy"></a><figcaption>经反向代理访问动态服务器与 MySQL 连接测试页，均返回成功（地址已打码）</figcaption></figure>
+      <figure><a href="assets/img/p2-topology.webp" target="_blank" rel="noopener"><img width="1280" height="765" src="assets/img/p2-topology.webp" alt="企业网络拓扑图：防火墙划分 trust/untrust 区、核心与接入交换机、无线 AC/AP 与终端（地址标注已打码）" loading="lazy"></a><figcaption>实训拓扑：FW1 划分 trust / untrust 安全域，下接核心、接入与无线（地址标注已打码）</figcaption></figure>
+      <figure><a href="assets/img/p2-nginx-dynamic.webp" target="_blank" rel="noopener"><img width="858" height="564" src="assets/img/p2-nginx-dynamic.webp" alt="浏览器访问动态服务器页面显示连接成功（地址已打码），另一标签页为 MySQL 连接测试页" loading="lazy"></a><figcaption>经反向代理访问动态服务器与 MySQL 连接测试页，均返回成功（地址已打码）</figcaption></figure>
       <p class="rel-article">相关文章：<a href="posts/enterprise-network-training.html">企业网络实训复盘：从 VLAN 规划到防火墙安全策略</a></p>
     </div>
 
@@ -185,8 +185,8 @@
         <li>用 etcdctl 从成员列表、端点健康、Raft 索引三个维度交叉验证数据一致性，并完成 etcd 快照备份；Nginx 三副本跨节点调度、删 Pod 后约 5 秒自愈重建</li>
         <li>记录了 6 个真实问题的排查与解决：端口占用、conntrack 缺失、内存低于 preflight 阈值、Calico 清单注解超限、镜像拉取失败、Calico 网段配置未生效导致 BIRD 未就绪</li>
       </ul>
-      <figure><a href="assets/img/p3-vip-failover.jpg" target="_blank" rel="noopener"><img width="804" height="428" src="assets/img/p3-vip-failover.webp" alt="停止 master1 的 Keepalived 后三台节点同时监视 VIP 的时间线：3 秒漂移、11 秒回切" loading="lazy"></a><figcaption>VIP 故障转移演练：t+3s 漂移到 master2，t+11s 原主恢复后抢占回切</figcaption></figure>
-      <figure><a href="assets/img/p3-component-health.jpg" target="_blank" rel="noopener"><img width="760" height="212" src="assets/img/p3-component-health.webp" alt="kubectl get cs 输出：controller-manager、scheduler、etcd-0 均为 Healthy" loading="lazy"></a><figcaption>控制平面组件健康检查：三组件全部 Healthy</figcaption></figure>
+      <figure><a href="assets/img/p3-vip-failover.webp" target="_blank" rel="noopener"><img width="804" height="428" src="assets/img/p3-vip-failover.webp" alt="停止 master1 的 Keepalived 后三台节点同时监视 VIP 的时间线：3 秒漂移、11 秒回切" loading="lazy"></a><figcaption>VIP 故障转移演练：t+3s 漂移到 master2，t+11s 原主恢复后抢占回切</figcaption></figure>
+      <figure><a href="assets/img/p3-component-health.webp" target="_blank" rel="noopener"><img width="760" height="212" src="assets/img/p3-component-health.webp" alt="kubectl get cs 输出：controller-manager、scheduler、etcd-0 均为 Healthy" loading="lazy"></a><figcaption>控制平面组件健康检查：三组件全部 Healthy</figcaption></figure>
       <p class="rel-article">相关文章：<a href="posts/nginx-keepalived-haproxy-ha.html">Nginx + Keepalived + HAProxy 高可用实测：停掉主节点之后发生了什么</a></p>
     </div>
 
@@ -204,8 +204,8 @@
         <li>存活探针自愈验证：删掉容器内首页文件使探针连续失败达到阈值后，容器被自动重启并恢复健康，全程无人干预</li>
         <li>环境适配：官方完整镜像拉取超时，改用同为官方发布的轻量版镜像完成实验，功能与配置方式一致</li>
       </ul>
-      <figure><a href="assets/img/p4-oomkilled.jpg" target="_blank" rel="noopener"><img width="1051" height="635" src="assets/img/p4-oomkilled.webp" alt="压力 Pod 申请 250M 超过 200Mi 上限后 kubectl get pod 显示 OOMKilled 及事件记录（Pod 地址已打码）" loading="lazy"></a><figcaption>超限对照实验：申请 250M 超过 limits 200Mi，容器被 OOMKilled（Pod 地址已打码）</figcaption></figure>
-      <figure><a href="assets/img/p4-pod-curl.jpg" target="_blank" rel="noopener"><img width="771" height="354" src="assets/img/p4-pod-curl.webp" alt="通过 jsonpath 取到 Pod 地址后分别用 curl 访问 busybox 与 nginx 容器并返回内容（地址已打码）" loading="lazy"></a><figcaption>双容器 Pod 验证：curl 按 Pod 地址访问，busybox 与 nginx 均有响应（地址已打码）</figcaption></figure>
+      <figure><a href="assets/img/p4-oomkilled.webp" target="_blank" rel="noopener"><img width="1051" height="635" src="assets/img/p4-oomkilled.webp" alt="压力 Pod 申请 250M 超过 200Mi 上限后 kubectl get pod 显示 OOMKilled 及事件记录（Pod 地址已打码）" loading="lazy"></a><figcaption>超限对照实验：申请 250M 超过 limits 200Mi，容器被 OOMKilled（Pod 地址已打码）</figcaption></figure>
+      <figure><a href="assets/img/p4-pod-curl.webp" target="_blank" rel="noopener"><img width="771" height="354" src="assets/img/p4-pod-curl.webp" alt="通过 jsonpath 取到 Pod 地址后分别用 curl 访问 busybox 与 nginx 容器并返回内容（地址已打码）" loading="lazy"></a><figcaption>双容器 Pod 验证：curl 按 Pod 地址访问，busybox 与 nginx 均有响应（地址已打码）</figcaption></figure>
     </div>
 
     <div class="post-card" id="p5">
@@ -221,8 +221,8 @@
         <li>配齐集群的硬性前置条件：chrony 时间同步、关闭 swap 与防火墙 / SELinux、开启内核 IP 转发、加载 IPVS 模块</li>
         <li>三个坑的完整排查记录：时间不同步导致证书校验失败、未关 swap 导致节点 NotReady、未开 IP 转发导致跨节点 Pod 不通——这段经历后来单独写成了<a href="posts/kubernetes-offline-3-pits.html">一篇博客</a></li>
       </ul>
-      <figure><a href="assets/img/p5-chrony.jpg" target="_blank" rel="noopener"><img width="707" height="327" src="assets/img/p5-chrony.webp" alt="chronyc sources -v 输出：多个 NTP 源可达、已同步（源地址已打码）" loading="lazy"></a><figcaption>时间同步验证：chrony 已与多个 NTP 源同步（源地址已打码）</figcaption></figure>
-      <figure><a href="assets/img/p5-ipvs.jpg" target="_blank" rel="noopener"><img width="707" height="150" src="assets/img/p5-ipvs.webp" alt="lsmod 输出显示 ip_vs 及 ip_vs_rr、ip_vs_wrr、ip_vs_sh 模块已加载" loading="lazy"></a><figcaption>IPVS 内核模块加载验证：ip_vs 与三种调度算法模块齐全</figcaption></figure>
+      <figure><a href="assets/img/p5-chrony.webp" target="_blank" rel="noopener"><img width="707" height="327" src="assets/img/p5-chrony.webp" alt="chronyc sources -v 输出：多个 NTP 源可达、已同步（源地址已打码）" loading="lazy"></a><figcaption>时间同步验证：chrony 已与多个 NTP 源同步（源地址已打码）</figcaption></figure>
+      <figure><a href="assets/img/p5-ipvs.webp" target="_blank" rel="noopener"><img width="707" height="150" src="assets/img/p5-ipvs.webp" alt="lsmod 输出显示 ip_vs 及 ip_vs_rr、ip_vs_wrr、ip_vs_sh 模块已加载" loading="lazy"></a><figcaption>IPVS 内核模块加载验证：ip_vs 与三种调度算法模块齐全</figcaption></figure>
       <p class="rel-article">相关文章：<a href="posts/kubernetes-offline-3-pits.html">离线部署 Kubernetes 双节点集群，我踩的 3 个坑</a></p>
     </div>
 
@@ -239,8 +239,8 @@
         <li>YARN ResourceManager HA 采用同样的主备机制，保证资源调度高可用</li>
         <li>完成 core-site、hdfs-site、yarn-site 等核心配置，HDFS 存储与 YARN 资源调度全链路打通</li>
       </ul>
-      <figure><a href="assets/img/p6-yarn-nodes.jpg" target="_blank" rel="noopener"><img width="1280" height="670" src="assets/img/p6-yarn-nodes.webp" alt="YARN ResourceManager 节点页：3 个节点均为 RUNNING，版本 3.3.5（地址栏已打码）" loading="lazy"></a><figcaption>YARN 集群节点页：3 节点全部 RUNNING（地址栏已打码）</figcaption></figure>
-      <figure><a href="assets/img/p6-namenode-overview.jpg" target="_blank" rel="noopener"><img width="1280" height="421" src="assets/img/p6-namenode-overview.webp" alt="HDFS NameNode 概览页：node1:8020 处于 active 状态，命名空间为 mycluster（地址已打码）" loading="lazy"></a><figcaption>NameNode 概览：主节点 active、命名空间 mycluster（地址已打码）</figcaption></figure>
+      <figure><a href="assets/img/p6-yarn-nodes.webp" target="_blank" rel="noopener"><img width="1280" height="670" src="assets/img/p6-yarn-nodes.webp" alt="YARN ResourceManager 节点页：3 个节点均为 RUNNING，版本 3.3.5（地址栏已打码）" loading="lazy"></a><figcaption>YARN 集群节点页：3 节点全部 RUNNING（地址栏已打码）</figcaption></figure>
+      <figure><a href="assets/img/p6-namenode-overview.webp" target="_blank" rel="noopener"><img width="1280" height="421" src="assets/img/p6-namenode-overview.webp" alt="HDFS NameNode 概览页：node1:8020 处于 active 状态，命名空间为 mycluster（地址已打码）" loading="lazy"></a><figcaption>NameNode 概览：主节点 active、命名空间 mycluster（地址已打码）</figcaption></figure>
     </div>
 
     <div class="post-card" id="p7">
@@ -255,8 +255,8 @@
         <li>部署前置工作逐项落实：主机名与 hosts 解析、停用 NetworkManager 与 firewalld、配置软件源、预先创建 Cinder 卷组避免安装中途中断</li>
         <li>部署后 Horizon 控制台可正常访问，认证、计算、存储、网络等核心模块无报错，单节点云平台环境可用</li>
       </ul>
-      <figure><a href="assets/img/p7-packstack.jpg" target="_blank" rel="noopener"><img width="667" height="548" src="assets/img/p7-packstack.webp" alt="Packstack 安装日志：Nova、Neutron、Horizon、Swift 等各组件条目全部 DONE" loading="lazy"></a><figcaption>Packstack 部署日志：各组件条目全部 DONE（结尾的控制器地址行已去除）</figcaption></figure>
-      <figure><a href="assets/img/p7-cinder-vg.jpg" target="_blank" rel="noopener"><img width="695" height="462" src="assets/img/p7-cinder-vg.webp" alt="lsblk 与 vgs 输出：磁盘分区布局与 cinder-volumes 卷组（挂载路径中的用户名已打码）" loading="lazy"></a><figcaption>部署前置：磁盘布局与预先创建的 cinder-volumes 卷组（路径中用户名已打码）</figcaption></figure>
+      <figure><a href="assets/img/p7-packstack.webp" target="_blank" rel="noopener"><img width="667" height="548" src="assets/img/p7-packstack.webp" alt="Packstack 安装日志：Nova、Neutron、Horizon、Swift 等各组件条目全部 DONE" loading="lazy"></a><figcaption>Packstack 部署日志：各组件条目全部 DONE（结尾的控制器地址行已去除）</figcaption></figure>
+      <figure><a href="assets/img/p7-cinder-vg.webp" target="_blank" rel="noopener"><img width="695" height="462" src="assets/img/p7-cinder-vg.webp" alt="lsblk 与 vgs 输出：磁盘分区布局与 cinder-volumes 卷组（挂载路径中的用户名已打码）" loading="lazy"></a><figcaption>部署前置：磁盘布局与预先创建的 cinder-volumes 卷组（路径中用户名已打码）</figcaption></figure>
     </div>
 
     <div class="post-card" id="p8">
@@ -272,8 +272,8 @@
         <li>安装 StarWind iSCSI SAN，创建 iSCSI 目标并开启多连接集群支持，将虚拟硬盘关联到目标，再配置访问控制策略</li>
         <li>ESXi 主机与 iSCSI 存储成功对接，管理流、存储流与虚拟机流量的网络划分清晰，各组件通信正常</li>
       </ul>
-      <figure><a href="assets/img/p8-topology.jpg" target="_blank" rel="noopener"><img width="1107" height="522" src="assets/img/p8-topology.webp" alt="VMware 实验拓扑图：物理机经 vmnet8 接 ESXi，iSCSI 服务器经 vmnet2 与 vSwitch-iSCSI 提供存储（地址标注已打码）" loading="lazy"></a><figcaption>实验拓扑：管理、虚拟机与 iSCSI 存储三股流量分开走不同 vSwitch（地址标注已打码）</figcaption></figure>
-      <figure><a href="assets/img/p8-esxi-host.jpg" target="_blank" rel="noopener"><img width="518" height="486" src="assets/img/p8-esxi-host.webp" alt="ESXi 主机管理界面：主机硬件与资源概览、近期任务成功记录（地址信息已打码）" loading="lazy"></a><figcaption>ESXi 主机 Web 管理界面：硬件概览与任务记录（地址信息已打码）</figcaption></figure>
+      <figure><a href="assets/img/p8-topology.webp" target="_blank" rel="noopener"><img width="1107" height="522" src="assets/img/p8-topology.webp" alt="VMware 实验拓扑图：物理机经 vmnet8 接 ESXi，iSCSI 服务器经 vmnet2 与 vSwitch-iSCSI 提供存储（地址标注已打码）" loading="lazy"></a><figcaption>实验拓扑：管理、虚拟机与 iSCSI 存储三股流量分开走不同 vSwitch（地址标注已打码）</figcaption></figure>
+      <figure><a href="assets/img/p8-esxi-host.webp" target="_blank" rel="noopener"><img width="518" height="486" src="assets/img/p8-esxi-host.webp" alt="ESXi 主机管理界面：主机硬件与资源概览、近期任务成功记录（地址信息已打码）" loading="lazy"></a><figcaption>ESXi 主机 Web 管理界面：硬件概览与任务记录（地址信息已打码）</figcaption></figure>
     </div>
 
   </section>

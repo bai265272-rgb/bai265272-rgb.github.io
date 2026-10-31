@@ -5,8 +5,22 @@
     <link>https://bai265272-rgb.github.io/</link>
     <description>网络工程、Linux 运维、Kubernetes 与高可用架构的实训记录和排障笔记。</description>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 31 Oct 2026 21:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 31 Oct 2026 22:45:00 +0800</lastBuildDate>
     <atom:link href="https://bai265272-rgb.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>项目详情：企业云数据中心运维实训（84 页报告）</title>
+      <link>https://bai265272-rgb.github.io/projects/p1.html</link>
+      <guid isPermaLink="true">https://bai265272-rgb.github.io/projects/p1.html</guid>
+      <pubDate>Sat, 31 Oct 2026 12:00:00 +0800</pubDate>
+      <description>84 页实训报告的公开详情页：目录与结构、关键截图（拓扑、OSPF、MySQL 多实例、Zabbix 监控与告警）和一段我做了什么、卡在哪、怎么解的复盘。</description>
+    </item>
+    <item>
+      <title>项目详情：企业网络系统规划与建设实施（45 页报告）</title>
+      <link>https://bai265272-rgb.github.io/projects/p2.html</link>
+      <guid isPermaLink="true">https://bai265272-rgb.github.io/projects/p2.html</guid>
+      <pubDate>Sat, 31 Oct 2026 12:00:00 +0800</pubDate>
+      <description>45 页实训报告的公开详情页：目录与结构、关键截图（拓扑、DNS 解析、文件服务、VIP 漂移）和复盘，卡点取自报告总结：DNS 区域文件、防火墙策略与 Keepalived 切换验证。</description>
+    </item>
     <item>
       <title>开博：为什么我要在 2026 年认真写技术博客</title>
       <link>https://bai265272-rgb.github.io/posts/hello-blog.html</link>
