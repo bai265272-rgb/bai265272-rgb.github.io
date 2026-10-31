@@ -4,14 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nginx + Keepalived + HAProxy 高可用实测 — 白士博的技术博客</title>
+<meta name="description" content="Nginx + Keepalived + HAProxy 高可用实测：停掉主节点后 VIP 漂移、HAProxy 自动摘除故障后端的完整验证过程与关键参数记录。">
+<link rel="canonical" href="https://bai265272-rgb.github.io/posts/nginx-keepalived-haproxy-ha.html">
 <link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/patch.css">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 </head>
 <body>
+<a class="skip-link" href="#main">跳到正文</a>
 <header class="site">
   <div class="wrap">
     <a class="logo" href="../index.html">baishibo<span>.blog</span></a>
     <nav class="main">
-      <a href="../index.html">文章</a>
+      <a href="../index.html" aria-current="page">文章</a>
       <a href="../portfolio.html">作品集</a>
       <a href="../about.html">关于我</a>
       <a href="https://github.com/bai265272-rgb" target="_blank" rel="noopener">GitHub</a>
@@ -19,7 +24,7 @@
   </div>
 </header>
 
-<main class="wrap">
+<main class="wrap" id="main">
   <article class="post">
     <h1>Nginx + Keepalived + HAProxy 高可用实测：停掉主节点之后发生了什么</h1>
     <div class="meta">2026-10-30 · 高可用 / Linux</div>
