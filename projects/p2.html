@@ -68,7 +68,7 @@
     <p>一次完整的企业网交付：先做园区网络（VLAN 规划、生成树、网关冗余、地址自动分配），再用防火墙划分安全域、做 NAT 与访问控制，最后在 Linux 上把 DNS、文件服务、网站和运维脚本一整套服务立起来。这个项目的完整版复盘我写成了博客文章：<a href="../posts/enterprise-network-training.html">企业网络实训复盘：从 VLAN 规划到防火墙安全策略</a>；这一页放报告目录、关键截图和一段简版复盘，作为"45 页报告"的证据。</p>
 
     <h2 id="sec-1">报告目录与结构</h2>
-        <figure><a href="../assets/img/p2-toc.jpg" target="_blank" rel="noopener"><img src="../assets/img/p2-toc.webp" alt="实训报告目录页（两页拼接）：五章结构，末页为第 45 页" width="1223" height="2426" loading="lazy"></a><figcaption>报告目录（原报告两页目录拼接）。五章结构，实施章占第 6–40 页，测试章有五组测试，总结落在第 45 页。</figcaption></figure>
+        <figure><a href="../assets/img/p2-toc.webp" target="_blank" rel="noopener"><img src="../assets/img/p2-toc.webp" alt="实训报告目录页（两页拼接）：五章结构，末页为第 45 页" width="1223" height="2426" loading="lazy"></a><figcaption>报告目录（原报告两页目录拼接）。五章结构，实施章占第 6–40 页，测试章有五组测试，总结落在第 45 页。</figcaption></figure>
     <table>
       <thead><tr><th>部分</th><th>内容</th><th>页码</th></tr></thead>
       <tbody>
@@ -81,11 +81,11 @@
     </table>
 
     <h2 id="sec-2">关键截图</h2>
-        <figure><a href="../assets/img/p2-topology.jpg" target="_blank" rel="noopener"><img src="../assets/img/p2-topology.webp" alt="企业网络拓扑：防火墙划分 trust/untrust 区、核心与接入交换机、无线 AC/AP 与终端" width="1280" height="765" loading="lazy"></a><figcaption>实训拓扑（地址标注已打码）：FW1 划分 trust / untrust 安全域，下接核心、接入与无线 AC/AP。</figcaption></figure>
-        <figure><a href="../assets/img/p2-dns.jpg" target="_blank" rel="noopener"><img src="../assets/img/p2-dns.webp" alt="DNS 正向解析测试：nslookup www.linuxprobe.com 返回 192.168.36.130" width="947" height="469" loading="lazy"></a><figcaption>DNS 正向解析验证：客户端把 nameserver 指向主 DNS 后，nslookup www.linuxprobe.com 正确返回 192.168.36.130。</figcaption></figure>
-        <figure><a href="../assets/img/p2-nfs.jpg" target="_blank" rel="noopener"><img src="../assets/img/p2-nfs.webp" alt="文件服务器上 NFS 服务进程运行状态" width="926" height="232" loading="lazy"></a><figcaption>文件服务验证：NFS 服务端进程齐全在跑。文件服务这一章把 FTP（匿名 / 本地 / 虚拟用户三种认证）、Samba、NFS 都逐项做了登录、上传与挂载验证。</figcaption></figure>
-        <figure><a href="../assets/img/p2-vip.jpg" target="_blank" rel="noopener"><img src="../assets/img/p2-vip.webp" alt="备机 lb02 上出现 VIP 192.168.137.100（secondary 地址）" width="749" height="107" loading="lazy"></a><figcaption>Keepalived 主备切换验证：停掉主节点后，备机 lb02 的 ens160 上出现 VIP 192.168.137.100（secondary），漂移成功。</figcaption></figure>
-        <figure><a href="../assets/img/p2-nginx-dynamic.jpg" target="_blank" rel="noopener"><img src="../assets/img/p2-nginx-dynamic.webp" alt="动态服务器页面：PHP 与 MySQL 连接成功" width="858" height="564" loading="lazy"></a><figcaption>Web 服务验证：Nginx 反向代理轮询分发到静态 / 动态两台后端，动态页面的 PHP 与 MySQL 连接测试通过。</figcaption></figure>
+        <figure><a href="../assets/img/p2-topology.webp" target="_blank" rel="noopener"><img src="../assets/img/p2-topology.webp" alt="企业网络拓扑：防火墙划分 trust/untrust 区、核心与接入交换机、无线 AC/AP 与终端" width="1280" height="765" loading="lazy"></a><figcaption>实训拓扑（地址标注已打码）：FW1 划分 trust / untrust 安全域，下接核心、接入与无线 AC/AP。</figcaption></figure>
+        <figure><a href="../assets/img/p2-dns.webp" target="_blank" rel="noopener"><img src="../assets/img/p2-dns.webp" alt="DNS 正向解析测试：nslookup www.linuxprobe.com 返回 192.168.36.130" width="947" height="469" loading="lazy"></a><figcaption>DNS 正向解析验证：客户端把 nameserver 指向主 DNS 后，nslookup www.linuxprobe.com 正确返回 192.168.36.130。</figcaption></figure>
+        <figure><a href="../assets/img/p2-nfs.webp" target="_blank" rel="noopener"><img src="../assets/img/p2-nfs.webp" alt="文件服务器上 NFS 服务进程运行状态" width="926" height="232" loading="lazy"></a><figcaption>文件服务验证：NFS 服务端进程齐全在跑。文件服务这一章把 FTP（匿名 / 本地 / 虚拟用户三种认证）、Samba、NFS 都逐项做了登录、上传与挂载验证。</figcaption></figure>
+        <figure><a href="../assets/img/p2-vip.webp" target="_blank" rel="noopener"><img src="../assets/img/p2-vip.webp" alt="备机 lb02 上出现 VIP 192.168.137.100（secondary 地址）" width="749" height="107" loading="lazy"></a><figcaption>Keepalived 主备切换验证：停掉主节点后，备机 lb02 的 ens160 上出现 VIP 192.168.137.100（secondary），漂移成功。</figcaption></figure>
+        <figure><a href="../assets/img/p2-nginx-dynamic.webp" target="_blank" rel="noopener"><img src="../assets/img/p2-nginx-dynamic.webp" alt="动态服务器页面：PHP 与 MySQL 连接成功" width="858" height="564" loading="lazy"></a><figcaption>Web 服务验证：Nginx 反向代理轮询分发到静态 / 动态两台后端，动态页面的 PHP 与 MySQL 连接测试通过。</figcaption></figure>
 
     <h2 id="sec-3">复盘：我做了什么、卡在哪、怎么解的</h2>
     <p><strong>做了什么。</strong>分三层推进：网络层按部门与功能划 VLAN，MSTP 防环、VRRP 做双网关冗余、DHCP 自动分配地址，出口 USG 防火墙划分 trust / untrust 安全域并配安全策略与 NAT；服务层在 Linux 上部署主从 DNS（正反向解析 + 区域同步）、文件服务全家桶（FTP 三种认证模式、Samba、NFS）、Nginx 反向代理加 LAMP 动态站，并用 Keepalived 做双机热备；最后写了两个运维脚本——服务自愈（检测到 Nginx 停止自动重启）和 LAMP 一键部署。五组测试（网络 / 域名解析 / 文件服务 / 网站 / 运维脚本）逐项留了结果。</p>
@@ -97,6 +97,7 @@
     <h2 id="sec-4">关于完整报告</h2>
     <p>完整报告包含实验环境的地址规划与设备配置全文，不在网上公开。需要查阅的话，可以在面试时当面屏幕共享展示；也可以先通过<a href="../about.html">关于我</a>页面的邮箱联系我说明用途。</p>
 
+    <p class="rel-article">另一个项目详情：<a href="p1.html">企业云数据中心运维实训</a>（84 页报告）</p>
     <p class="updated">最后更新于 2026-10-31</p>
 
     <div class="author-card">
