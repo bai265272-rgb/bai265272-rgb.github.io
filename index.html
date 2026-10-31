@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>白士博的技术博客 — 网络 · Linux · 云运维</title>
+<meta name="description" content="白士博的技术博客：网络工程、Linux 运维、Kubernetes 与高可用架构的实训记录和排障笔记。">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="index.html">baishibo<span>.blog</span></a>
+    <nav class="main">
+      <a href="index.html">文章</a>
+      <a href="portfolio.html">作品集</a>
+      <a href="about.html">关于我</a>
+      <a href="https://github.com/bai265272-rgb" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>网络、系统与云运维的实操笔记</h1>
+    <p>我是白士博，网络工程本科在读（2027 届），持有 H3CNE-RS+ 与 H3CSE-RS-RT 双认证。这里记录我在企业网络、Linux 运维、Kubernetes 集群和高可用架构上的实训过程与排障经验——只写自己真正动手做过的东西。</p>
+    <div class="tags">
+      <span class="tag">路由与交换</span><span class="tag">Linux 运维</span><span class="tag">Kubernetes</span><span class="tag">高可用架构</span><span class="tag">Zabbix 监控</span><span class="tag">AI 工具实践</span>
+    </div>
+  </section>
+
+  <section class="post-list">
+    <h2 class="section-head">作品集精选</h2>
+    <p class="section-sub">两段完整的课程实训和最有代表性的两份云原生实验，全部独立做完并做过故障验证。<a class="more-link" href="portfolio.html">查看全部 8 个项目 →</a></p>
+
+    <div class="post-card">
+      <h2><a href="portfolio.html#p1">企业云数据中心运维实训</a></h2>
+      <div class="meta">课程实训 · 84 页报告 · 独立完成</div>
+      <p>一段完整的云数据中心交付：三层网络（MSTP / VRRP / OSPF）加双防火墙 HRP 主备，MySQL 多实例，Nginx + Keepalived + HAProxy 高可用与负载均衡，Zabbix 监控告警，FreeVM 虚拟化与在线迁移。</p>
+    </div>
+
+    <div class="post-card">
+      <h2><a href="portfolio.html#p2">企业网络系统规划与建设实施</a></h2>
+      <div class="meta">课程实训 · 45 页报告 · 独立完成</div>
+      <p>从零搭建能对外提供服务的企业网络：VLAN 隔离与防火墙安全域、主从 DNS、FTP 三种认证与 Samba / NFS 文件服务、Nginx 反向代理双机热备，外加服务自愈脚本。</p>
+    </div>
+
+    <div class="post-card">
+      <h2><a href="portfolio.html#p3">三节点控制平面高可用集群与故障转移</a></h2>
+      <div class="meta">Kubernetes v1.31.14 · 实验</div>
+      <p>3 台 Master 堆叠 etcd + HAProxy + Keepalived VIP；实测 VIP 漂移约 3 秒、etcd 自动重选 leader，并解决 LB 与 apiserver 同机时的端口冲突等 6 个真实问题。</p>
+    </div>
+
+    <div class="post-card">
+      <h2><a href="portfolio.html#p4">Pod 编排：多容器、资源限制与探针</a></h2>
+      <div class="meta">Kubernetes · 实验</div>
+      <p>多容器 Pod 共享卷协作、limits 落到 cgroup 的实测、超限 OOMKilled 对照实验、存活探针触发自动重启自愈——把 Pod 的三个关键机制都验证了一遍。</p>
+    </div>
+  </section>
+
+  <section class="post-list">
+    <h2 class="section-head">文章</h2>
+    <div class="post-card">
+      <h2><a href="posts/hello-blog.html">开博：为什么我要在 2026 年认真写技术博客</a></h2>
+      <div class="meta">2026-10-30 · 随笔</div>
+      <p>实训报告写完就躺在硬盘里太可惜了。这个博客想解决三件事：把做过的实验沉淀成能复用的排障手册、倒逼自己把技术讲清楚、给未来的面试官一个比简历更立体的我。</p>
+    </div>
+
+    <div class="post-card">
+      <h2><a href="posts/kubernetes-offline-3-pits.html">离线部署 Kubernetes 双节点集群，我踩的 3 个坑</a></h2>
+      <div class="meta">2026-10-30 · Kubernetes / 排障</div>
+      <p>VMware + CentOS 7.6、无外网环境下用 kubeadm 离线部署双节点集群。时间不同步、swap 没关、IP 转发没开——三个坑依次爆出来，又依次被填平的全过程。</p>
+    </div>
+
+    <div class="post-card">
+      <h2><a href="posts/nginx-keepalived-haproxy-ha.html">Nginx + Keepalived + HAProxy 高可用实测：停掉主节点之后发生了什么</a></h2>
+      <div class="meta">2026-10-30 · 高可用 / Linux</div>
+      <p>高可用不能靠“配置写完了”来自我感动，得真停服务验证。这篇记录 VIP 漂移、HAProxy 自动摘除故障后端的完整验证过程和关键参数。</p>
+    </div>
+
+    <div class="post-card">
+      <h2><a href="posts/enterprise-network-training.html">企业网络实训复盘：从 VLAN 规划到防火墙安全策略</a></h2>
+      <div class="meta">2026-10-30 · 网络工程</div>
+      <p>一套能对外提供服务的企业网络是怎么搭出来的：核心—接入组网、VLAN 10/20 广播隔离、USG6000V1 安全域与 NAT、主从 DNS 和文件服务的完整链路复盘。</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">© 2026 白士博 · 网络工程 / 云运维 · 石家庄<br>本站为静态页面，托管于 GitHub Pages</div>
+</footer>
+</body>
+</html>
