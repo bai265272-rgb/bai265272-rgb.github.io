@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>企业网络实训复盘：从 VLAN 规划到防火墙安全策略 — 白士博的技术博客</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">baishibo<span>.blog</span></a>
+    <nav class="main">
+      <a href="../index.html">文章</a>
+      <a href="../portfolio.html">作品集</a>
+      <a href="../about.html">关于我</a>
+      <a href="https://github.com/bai265272-rgb" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <article class="post">
+    <h1>企业网络实训复盘：从 VLAN 规划到防火墙安全策略</h1>
+    <div class="meta">2026-10-30 · 网络工程</div>
+
+    <p>这次实训的目标不是“把设备配通”，而是完整交付一套能对外提供服务的企业网络：从拓扑规划、设备端口与 IP 地址规划表开始，到服务上线、验收测试和文档移交为止。最后成型的实训报告有 45 页，这里把主干链路复盘一遍。</p>
+
+    <h2>第一步：组网与 VLAN 规划</h2>
+    <p>采用核心层＋接入层架构，先出组网方案和端口/IP 规划表再动手。接入层划分 VLAN 10 / 20 做广播隔离，不同部门的广播域互不干扰；同时配置 WLAN，为移动终端提供无线接入。先规划后实施的好处在后面排查时体现得很明显：任何一台终端的地址归属，查表就能定位。</p>
+
+    <h2>第二步：安全边界</h2>
+    <p>出口部署 USG6000V1 防火墙，划分 trust / untrust 安全域，内网流量和外网流量从策略层面分开管：安全策略控制谁能访问谁，NAT 策略负责内网地址出公网的转换。顺序上先定安全域、再写策略、最后做 NAT，每一步都留验证点，避免策略叠在一起出了问题不知道是哪条生效。</p>
+
+    <h2>第三步：基础服务</h2>
+    <ul>
+      <li><strong>主从 DNS</strong>：为 linuxprobe.com 搭建主从 DNS，完成正向、反向解析和从服务器的区域文件同步——主服务器改记录，从服务器自动跟上，才算合格。</li>
+      <li><strong>NFS</strong>：Linux 之间共享文件系统。</li>
+      <li><strong>FTP</strong>：匿名、本地用户、虚拟用户三种认证方式全部实现，理解不同场景下该用哪一种。</li>
+      <li><strong>Samba</strong>：打通 Windows 与 Linux 之间的文件共享，并完成跨系统挂载验证。</li>
+    </ul>
+
+    <h2>第四步：Web 服务与高可用</h2>
+    <p>对外服务用 Nginx 反向代理 + Keepalived 双机热备，对外只暴露一个 VIP；另外写了运维脚本自动拉起异常退出的服务，并做了轮询分发验证。这套高可用的故障验证细节我单独写了一篇：<a href="nginx-keepalived-haproxy-ha.html">《Nginx + Keepalived + HAProxy 高可用实测》</a>。</p>
+
+    <h2>交付物清单</h2>
+    <ul>
+      <li>核心—接入组网方案、设备端口与 IP 地址规划表</li>
+      <li>USG 安全策略与 NAT 配置</li>
+      <li>DNS 主从区域文件</li>
+      <li>设备配置文档与验收测试报告</li>
+    </ul>
+
+    <div class="note"><strong>复盘一句话：</strong>网络工程和写代码一样，“能跑”只是及格线。规划表、配置文档、验收记录齐全，别人接手时不用逆向你的脑子，这才叫交付。</div>
+
+    <a class="back" href="../index.html">← 返回文章列表</a>
+  </article>
+</main>
+
+<footer class="site">
+  <div class="wrap">© 2026 白士博 · 网络工程 / 云运维 · 石家庄</div>
+</footer>
+</body>
+</html>

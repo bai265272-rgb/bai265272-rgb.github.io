@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nginx + Keepalived + HAProxy 高可用实测 — 白士博的技术博客</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">baishibo<span>.blog</span></a>
+    <nav class="main">
+      <a href="../index.html">文章</a>
+      <a href="../portfolio.html">作品集</a>
+      <a href="../about.html">关于我</a>
+      <a href="https://github.com/bai265272-rgb" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <article class="post">
+    <h1>Nginx + Keepalived + HAProxy 高可用实测：停掉主节点之后发生了什么</h1>
+    <div class="meta">2026-10-30 · 高可用 / Linux</div>
+
+    <p>高可用架构最忌讳的就是“配置写完 = 高可用达成”。VIP 会不会漂移、后端挂了流量会不会还往死节点上打，只有真的把服务停掉才能知道答案。这篇记录我在云数据中心运维实训里搭的这套架构和它的完整故障验证过程。</p>
+
+    <h2>架构分工</h2>
+    <table>
+      <tr><th>组件</th><th>职责</th></tr>
+      <tr><td>Keepalived</td><td>维护虚拟 IP（VIP）192.168.36.200，主节点故障时把 VIP 漂移到备节点</td></tr>
+      <tr><td>HAProxy</td><td>对后端做轮询分发，并持续健康检查，自动摘除故障后端</td></tr>
+      <tr><td>Nginx</td><td>实际提供 Web 服务的后端（源码编译部署），同时做反向代理</td></tr>
+    </table>
+    <p>HAProxy 的健康检查参数用的是 <code>inter 2000 fall 3 rise 2</code>：每 2 秒检查一次，连续 3 次失败判定后端下线，连续 2 次成功才重新上线。这个参数组合的意思是“宁可慢一点摘除，也不要因为一次网络抖动就误杀后端”。</p>
+
+    <h2>验证一：停掉主节点的 Keepalived</h2>
+    <p><strong>操作：</strong>在主节点上停止 Keepalived 服务，持续访问 VIP 提供的 Web 服务。</p>
+    <p><strong>结果：</strong>VIP 自动漂移到备节点，Web 访问短暂波动后恢复，用户侧感知不到节点已经换了一台。如果漂移失败，VIP 会成为一个谁都不响应的地址，整个验证的意义就在这里——不停一次，你永远不知道漂移脚本和优先级配置到底对不对。</p>
+
+    <h2>验证二：停掉一台后端 Nginx</h2>
+    <p><strong>操作：</strong>保持 VIP 不动，单独停止其中一台后端的 Nginx。</p>
+    <p><strong>结果：</strong>HAProxy 在健康检查连续失败达到阈值后自动摘除该后端，后续请求全部由存活后端承接，没有出现 502 也没有把请求继续打给已停的服务。恢复这台 Nginx 后，连续检查成功，它又被自动加回轮询。</p>
+
+    <div class="warn"><strong>容易漏的一步：</strong>验证做完一定要把服务恢复、再确认一遍 VIP 归属和后端状态。实训环境无所谓，生产环境里“测完忘了恢复”本身就是一次事故。</div>
+
+    <h2>顺带一提：同实训里的数据隔离</h2>
+    <p>这套环境里 MySQL 用了多实例部署：3307 / 3308 两个实例各自独立的 socket 与数据目录，在同一台机器上实现业务数据隔离和独立启停。思路和上面一脉相承——隔离边界先划清楚，故障才不会互相传染。</p>
+
+    <div class="note"><strong>复盘一句话：</strong>高可用的交付标准不是配置文件，而是故障验证记录：停什么、多久恢复、用户侧现象如何，三项写全了才算做完。</div>
+
+    <a class="back" href="../index.html">← 返回文章列表</a>
+  </article>
+</main>
+
+<footer class="site">
+  <div class="wrap">© 2026 白士博 · 网络工程 / 云运维 · 石家庄</div>
+</footer>
+</body>
+</html>
