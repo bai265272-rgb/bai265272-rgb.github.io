@@ -53,3 +53,78 @@ footer.site{border-top:1px solid var(--line);color:var(--muted);font-size:13.5px
 .post-card figure img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px}
 .post-card figcaption{color:var(--muted);font-size:13.5px;margin-top:6px;line-height:1.6}
 @media(max-width:640px){article.post{padding:24px 20px}.hero h1{font-size:26px}}
+
+/* ===== 原 patch.css 补丁层（2026-10-31 起并入） ===== */
+/* 审查整改补丁（2026-10-31）：无障碍 / 导航 / 行宽 / 响应式兜底，在 style.css 之后加载 */
+
+/* 跳转链接：键盘用户可越过导航直达正文 */
+.skip-link{position:absolute;left:16px;top:-64px;z-index:60;background:#0b1220;color:#fff;
+  padding:10px 18px;border-radius:0 0 10px 10px;transition:top .15s ease}
+.skip-link:focus{top:0;color:#fff;text-decoration:underline}
+
+/* 可见焦点样式：浅色背景用深蓝 #2563eb（对比度 5.17:1），深色头部用亮蓝 */
+:focus-visible{outline:3px solid #2563eb;outline-offset:2px;border-radius:4px}
+header.site :focus-visible{outline-color:#7dd3fc}
+
+/* 正文行内链接恢复下划线，不只靠颜色区分（WCAG 1.4.1） */
+article.post p a,article.post li a,.post-card p a,.section-sub a{text-decoration:underline}
+
+/* 导航改用 gap 布局，消除移动端折行后首项 18px 错位 */
+nav.main{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+nav.main a{margin-left:0}
+nav.main a[aria-current="page"]{color:#fff;font-weight:600;
+  border-bottom:2px solid #7dd3fc;padding-bottom:2px}
+
+/* 流体字号：小屏自动收敛，不必多设断点 */
+.hero h1{font-size:clamp(1.6rem,4.2vw,2rem)}
+.section-head{font-size:clamp(1.3rem,3vw,1.45rem)}
+
+/* 正文行宽收窄到中文舒适区（约 42 字/行以内） */
+article.post p,article.post li{max-width:42em}
+
+@media(max-width:640px){
+  header.site{padding:14px 0}
+  nav.main{gap:14px}
+  /* 宽表格在小屏上横向滚动，不再硬挤列宽 */
+  table{display:block;overflow-x:auto}
+}
+
+/* 卡片标题降为 h3 后的等效样式（标题层级整改） */
+.post-card h3{margin:0 0 6px;font-size:21px;line-height:1.4}
+.post-card h3 a{color:var(--ink)}
+.post-card h3 a:hover{color:var(--accent);text-decoration:none}
+
+/* 首页标签去按钮化：纯文本 + # 前缀，不再假装可点 */
+.tag{background:none;color:var(--muted);padding:2px 8px 2px 0;font-size:13.5px}
+.tag::before{content:"#";color:var(--accent);margin-right:2px}
+
+/* 作品集图片可点开看大图 */
+.post-card figure a{display:block}
+.post-card figure a img{transition:opacity .15s ease}
+.post-card figure a:hover img{opacity:.92}
+
+/* 文章页：目录 / 上下篇 / 作者卡 / 证据图（第三批整改） */
+.toc{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:18px 0 6px}
+.toc strong{display:block;margin-bottom:6px}
+.toc ol{margin:0;padding-left:22px}
+.toc li{margin:3px 0}
+article.post figure{margin:18px 0}
+article.post figure img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px}
+article.post figcaption{color:var(--muted);font-size:13.5px;margin-top:6px;line-height:1.6}
+.post-nav{border-top:1px solid var(--line);margin-top:30px;padding-top:16px}
+.post-nav-links{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+.related strong{display:block;margin-bottom:4px}
+.related ul{margin:4px 0;padding-left:20px}
+.updated{color:var(--muted);font-size:13px;margin:12px 0 0}
+.author-card{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-top:18px}
+.author-name{font-weight:700;font-size:16px}
+.author-card p{margin:6px 0 0}
+.rel-article{margin-top:10px}
+
+/* 第二轮复审补丁（2026-10-31）：页脚贴底 / 卡片行宽 / RSS 入口 */
+body{min-height:100vh;display:flex;flex-direction:column}
+main{flex:1}
+.post-card p{max-width:42em}
+footer.site .rss{display:inline-block;margin-top:6px;font-size:13px;color:var(--muted);
+  text-decoration:underline;text-underline-offset:2px}
+footer.site .rss:hover{color:var(--accent)}
