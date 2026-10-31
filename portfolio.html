@@ -165,6 +165,7 @@
         <li>文件服务全家桶并逐项验证：FTP 的匿名、本地、虚拟用户三种认证模式分别登录上传以验证权限隔离；Samba 完成 Windows 客户端挂载 Linux 共享；NFS 完成挂载与读写验证</li>
         <li>Nginx 反向代理轮询分发 + Keepalived 双机热备对外提供服务；另编写了服务自愈脚本（检测到 Nginx 停止自动重启）和 LAMP 环境一键部署脚本</li>
       </ul>
+      <p class="rel-article">项目详情：<a href="projects/p2.html">报告目录、关键截图与复盘</a></p>
       <figure><a href="assets/img/p2-topology.jpg" target="_blank" rel="noopener"><img width="1280" height="765" src="assets/img/p2-topology.webp" alt="企业网络拓扑图：防火墙划分 trust/untrust 区、核心与接入交换机、无线 AC/AP 与终端（地址标注已打码）" loading="lazy"></a><figcaption>实训拓扑：FW1 划分 trust / untrust 安全域，下接核心、接入与无线（地址标注已打码）</figcaption></figure>
       <figure><a href="assets/img/p2-nginx-dynamic.jpg" target="_blank" rel="noopener"><img width="858" height="564" src="assets/img/p2-nginx-dynamic.webp" alt="浏览器访问动态服务器页面显示连接成功（地址已打码），另一标签页为 MySQL 连接测试页" loading="lazy"></a><figcaption>经反向代理访问动态服务器与 MySQL 连接测试页，均返回成功（地址已打码）</figcaption></figure>
       <p class="rel-article">相关文章：<a href="posts/enterprise-network-training.html">企业网络实训复盘：从 VLAN 规划到防火墙安全策略</a></p>
