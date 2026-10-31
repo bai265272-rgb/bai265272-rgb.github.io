@@ -95,7 +95,7 @@
 chronyc tracking
 date   # 确认双节点时间一致再执行 kubeadm init</code></pre>
 
-    <figure><a href="../assets/img/p5-chrony.jpg" target="_blank" rel="noopener"><img src="../assets/img/p5-chrony.webp" alt="chronyc sources -v 输出：多个 NTP 源可达、已同步（源地址已打码）" loading="lazy" width="707" height="327"></a><figcaption>坑一的证据：chrony 与多个 NTP 源完成同步后，kubeadm 初始化不再因时间问题失败（源地址已打码）</figcaption></figure>
+    <figure><a href="../assets/img/p5-chrony.webp" target="_blank" rel="noopener"><img src="../assets/img/p5-chrony.webp" alt="chronyc sources -v 输出：多个 NTP 源可达、已同步（源地址已打码）" loading="lazy" width="707" height="327"></a><figcaption>坑一的证据：chrony 与多个 NTP 源完成同步后，kubeadm 初始化不再因时间问题失败（源地址已打码）</figcaption></figure>
 
     <h2 id="sec-3">坑二：swap 没关，节点 NotReady</h2>
     <p><strong>现象：</strong>Node 加入集群后状态迟迟不是 Ready，kubelet 日志反复异常。原因是 CentOS 默认开启的 swap 没有关——kubelet 的设计假设就是宿主机不使用 swap，检测到 swap 开着会直接拒绝正常工作。</p>
@@ -111,7 +111,7 @@ free -m   # 重启后确认 swap 为 0</code></pre>
 sysctl -p
 sysctl net.ipv4.ip_forward   # 输出 1 才算生效</code></pre>
 
-    <figure><a href="../assets/img/p5-ipvs.jpg" target="_blank" rel="noopener"><img src="../assets/img/p5-ipvs.webp" alt="lsmod 输出显示 ip_vs 及 ip_vs_rr、ip_vs_wrr、ip_vs_sh 模块已加载" loading="lazy" width="707" height="150"></a><figcaption>坑三的证据：IPVS 内核模块加载齐全，跨节点 Pod 网络恢复通畅</figcaption></figure>
+    <figure><a href="../assets/img/p5-ipvs.webp" target="_blank" rel="noopener"><img src="../assets/img/p5-ipvs.webp" alt="lsmod 输出显示 ip_vs 及 ip_vs_rr、ip_vs_wrr、ip_vs_sh 模块已加载" loading="lazy" width="707" height="150"></a><figcaption>坑三的证据：IPVS 内核模块加载齐全，跨节点 Pod 网络恢复通畅</figcaption></figure>
 
     <h2 id="sec-5">最终状态</h2>
     <p>三个坑填平后，两节点均为 Ready，etcd、kube-apiserver、kube-controller-manager、kube-scheduler 等核心组件运行正常。</p>

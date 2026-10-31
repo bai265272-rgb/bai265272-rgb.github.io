@@ -126,7 +126,7 @@ vrrp_instance nginx_vip {
     <p><strong>操作：</strong>在主节点上停止 Keepalived 服务，持续访问 VIP 提供的 Web 服务。</p>
     <p><strong>结果：</strong>VIP 自动漂移到备节点，Web 访问短暂波动后恢复，用户侧感知不到节点已经换了一台。如果漂移失败，VIP 会成为一个谁都不响应的地址，整个验证的意义就在这里——不停一次，你永远不知道漂移脚本和优先级配置到底对不对。</p>
 
-    <figure><a href="../assets/img/p3-vip-failover.jpg" target="_blank" rel="noopener"><img src="../assets/img/p3-vip-failover.webp" alt="停止 master1 的 Keepalived 后三台节点同时监视 VIP 的时间线：3 秒漂移、11 秒回切" loading="lazy" width="804" height="428"></a><figcaption>验证一的证据：停掉主节点 Keepalived 后，VIP 在约 3 秒内漂移到备节点</figcaption></figure>
+    <figure><a href="../assets/img/p3-vip-failover.webp" target="_blank" rel="noopener"><img src="../assets/img/p3-vip-failover.webp" alt="停止 master1 的 Keepalived 后三台节点同时监视 VIP 的时间线：3 秒漂移、11 秒回切" loading="lazy" width="804" height="428"></a><figcaption>验证一的证据：停掉主节点 Keepalived 后，VIP 在约 3 秒内漂移到备节点</figcaption></figure>
 
     <h2 id="sec-3">验证二：停掉一台后端 Nginx</h2>
     <p><strong>操作：</strong>保持 VIP 不动，单独停止其中一台后端的 Nginx。</p>
@@ -134,7 +134,7 @@ vrrp_instance nginx_vip {
 
     <div class="warn"><strong>容易漏的一步：</strong>验证做完一定要把服务恢复、再确认一遍 VIP 归属和后端状态。实训环境无所谓，生产环境里“测完忘了恢复”本身就是一次事故。</div>
 
-    <figure><a href="../assets/img/p1-haproxy-stats.jpg" target="_blank" rel="noopener"><img src="../assets/img/p1-haproxy-stats.webp" alt="HAProxy 状态页局部：一台后端显示 DOWN（L4CON），其余两台 UP（L7OK/200）" loading="lazy" width="852" height="118"></a><figcaption>验证二的证据：故障后端被 HAProxy 自动摘除（DOWN），其余后端正常（L7OK/200）</figcaption></figure>
+    <figure><a href="../assets/img/p1-haproxy-stats.webp" target="_blank" rel="noopener"><img src="../assets/img/p1-haproxy-stats.webp" alt="HAProxy 状态页局部：一台后端显示 DOWN（L4CON），其余两台 UP（L7OK/200）" loading="lazy" width="852" height="118"></a><figcaption>验证二的证据：故障后端被 HAProxy 自动摘除（DOWN），其余后端正常（L7OK/200）</figcaption></figure>
 
     <h2 id="sec-4">顺带一提：同实训里的数据隔离</h2>
     <p>这套环境里 MySQL 用了多实例部署：3307 / 3308 两个实例各自独立的 socket 与数据目录，在同一台机器上实现业务数据隔离和独立启停。思路和上面一脉相承——隔离边界先划清楚，故障才不会互相传染。</p>

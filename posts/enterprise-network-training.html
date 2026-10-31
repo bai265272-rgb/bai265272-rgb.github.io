@@ -83,7 +83,7 @@
 <h2 id="sec-1">第一步：组网与 VLAN 规划</h2>
     <p>采用核心层＋接入层架构，先出组网方案和端口/IP 规划表再动手。接入层划分 VLAN 10 / 20 做广播隔离，不同部门的广播域互不干扰；同时配置 WLAN，为移动终端提供无线接入。先规划后实施的好处在后面排查时体现得很明显：任何一台终端的地址归属，查表就能定位。</p>
 
-    <figure><a href="../assets/img/p2-topology.jpg" target="_blank" rel="noopener"><img src="../assets/img/p2-topology.webp" alt="企业网络拓扑图：防火墙划分 trust/untrust 区、核心与接入交换机、无线 AC/AP 与终端（地址标注已打码）" loading="lazy" width="1280" height="765"></a><figcaption>第一步的成果：整网拓扑——FW1 划分 trust / untrust 安全域，LSW2 为核心，AC2 / AP1 提供无线接入（地址标注已打码）</figcaption></figure>
+    <figure><a href="../assets/img/p2-topology.webp" target="_blank" rel="noopener"><img src="../assets/img/p2-topology.webp" alt="企业网络拓扑图：防火墙划分 trust/untrust 区、核心与接入交换机、无线 AC/AP 与终端（地址标注已打码）" loading="lazy" width="1280" height="765"></a><figcaption>第一步的成果：整网拓扑——FW1 划分 trust / untrust 安全域，LSW2 为核心，AC2 / AP1 提供无线接入（地址标注已打码）</figcaption></figure>
 
     <h2 id="sec-2">第二步：安全边界</h2>
     <p>出口部署 USG6000V1 防火墙，划分 trust / untrust 安全域，内网流量和外网流量从策略层面分开管：安全策略控制谁能访问谁，NAT 策略负责内网地址出公网的转换。顺序上先定安全域、再写策略、最后做 NAT，每一步都留验证点，避免策略叠在一起出了问题不知道是哪条生效。</p>
@@ -104,7 +104,7 @@ allow-query     { any; };      # 改前：localhost，只答本机</code></pre>
 <h2 id="sec-4">第四步：Web 服务与高可用</h2>
     <p>对外服务用 Nginx 反向代理 + Keepalived 双机热备，对外只暴露一个 VIP；另外写了运维脚本自动拉起异常退出的服务，并做了轮询分发验证。这套高可用的故障验证细节我单独写了一篇：<a href="nginx-keepalived-haproxy-ha.html">《Nginx + Keepalived + HAProxy 高可用实测》</a>。</p>
 
-    <figure><a href="../assets/img/p2-nginx-dynamic.jpg" target="_blank" rel="noopener"><img src="../assets/img/p2-nginx-dynamic.webp" alt="浏览器访问动态服务器页面显示连接成功（地址已打码），另一标签页为 MySQL 连接测试页" loading="lazy" width="858" height="564"></a><figcaption>第四步的证据：经 Nginx 反向代理访问动态服务器与 MySQL 连接测试页均返回成功（地址已打码）</figcaption></figure>
+    <figure><a href="../assets/img/p2-nginx-dynamic.webp" target="_blank" rel="noopener"><img src="../assets/img/p2-nginx-dynamic.webp" alt="浏览器访问动态服务器页面显示连接成功（地址已打码），另一标签页为 MySQL 连接测试页" loading="lazy" width="858" height="564"></a><figcaption>第四步的证据：经 Nginx 反向代理访问动态服务器与 MySQL 连接测试页均返回成功（地址已打码）</figcaption></figure>
 
     <h2 id="sec-5">交付物清单</h2>
     <ul>
