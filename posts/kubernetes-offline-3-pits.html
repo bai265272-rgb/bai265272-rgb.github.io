@@ -6,9 +6,47 @@
 <title>离线部署 Kubernetes 双节点集群，我踩的 3 个坑 — 白士博的技术博客</title>
 <meta name="description" content="无外网环境下用 kubeadm 离线部署 Kubernetes 双节点集群：时间不同步、swap 未关闭、IP 转发未开启——三个坑依次爆出又被填平的全过程。">
 <link rel="canonical" href="https://bai265272-rgb.github.io/posts/kubernetes-offline-3-pits.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="白士博的技术博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="离线部署 Kubernetes 双节点集群，我踩的 3 个坑">
+<meta property="og:description" content="无外网环境下用 kubeadm 离线部署 Kubernetes 双节点集群：时间不同步、swap 未关闭、IP 转发未开启——三个坑依次爆出又被填平的全过程。">
+<meta property="og:url" content="https://bai265272-rgb.github.io/posts/kubernetes-offline-3-pits.html">
+<meta property="og:image" content="https://bai265272-rgb.github.io/assets/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="离线部署 Kubernetes 双节点集群，我踩的 3 个坑">
+<meta name="twitter:description" content="无外网环境下用 kubeadm 离线部署 Kubernetes 双节点集群：时间不同步、swap 未关闭、IP 转发未开启——三个坑依次爆出又被填平的全过程。">
+<meta name="twitter:image" content="https://bai265272-rgb.github.io/assets/og-default.png">
+<meta property="article:published_time" content="2026-10-30T09:00:00+08:00">
+<link rel="alternate" type="application/rss+xml" title="白士博的技术博客 RSS" href="../feed.xml">
 <link rel="stylesheet" href="../assets/style.css">
 <link rel="stylesheet" href="../assets/patch.css">
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "离线部署 Kubernetes 双节点集群，我踩的 3 个坑",
+  "datePublished": "2026-10-30",
+  "dateModified": "2026-10-31",
+  "inLanguage": "zh-CN",
+  "author": {
+    "@type": "Person",
+    "name": "白士博",
+    "url": "https://bai265272-rgb.github.io/about.html",
+    "sameAs": [
+      "https://github.com/bai265272-rgb"
+    ],
+    "description": "2027 届网络工程本科在读，持 H3CNE-RS+ 与 H3CSE-RS-RT 双认证，专注网络工程、Linux 运维与 Kubernetes 高可用。"
+  },
+  "description": "无外网环境下用 kubeadm 离线部署 Kubernetes 双节点集群：时间不同步、swap 未关闭、IP 转发未开启——三个坑依次爆出又被填平的全过程。",
+  "mainEntityOfPage": "https://bai265272-rgb.github.io/posts/kubernetes-offline-3-pits.html",
+  "image": "https://bai265272-rgb.github.io/assets/og-default.png"
+}
+</script>
 </head>
 <body>
 <a class="skip-link" href="#main">跳到正文</a>
@@ -27,7 +65,7 @@
 <main class="wrap" id="main">
   <article class="post">
     <h1>离线部署 Kubernetes 双节点集群，我踩的 3 个坑</h1>
-    <div class="meta">2026-10-30 · Kubernetes / 排障</div>
+    <div class="meta"><time datetime="2026-10-30">2026-10-30</time> · Kubernetes / 排障</div>
 
     <p>客户现场和实验室里经常没有外网，Kubernetes 部署就必须走离线路线。这次实训的环境是 VMware + CentOS 7.6，通过 SFTP 把镜像和离线包传进去、搭本地 YUM 源，再用 kubeadm 拉起一个双节点集群。流程本身不复杂，但三个坑依次爆出来，个个都是“文档里一笔带过、现场能卡你半天”的类型。</p>
 
