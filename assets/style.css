@@ -49,4 +49,7 @@ th,td{border:1px solid var(--line);padding:8px 12px;text-align:left}
 th{background:#f1f5f9}
 footer.site{border-top:1px solid var(--line);color:var(--muted);font-size:13.5px;padding:22px 0 34px;text-align:center}
 .back{display:inline-block;margin:26px 0 0}
+.post-card figure{margin:14px 0 4px}
+.post-card figure img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px}
+.post-card figcaption{color:var(--muted);font-size:13.5px;margin-top:6px;line-height:1.6}
 @media(max-width:640px){article.post{padding:24px 20px}.hero h1{font-size:26px}}
