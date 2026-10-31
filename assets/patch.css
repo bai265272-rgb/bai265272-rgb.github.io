@@ -44,3 +44,21 @@ article.post p,article.post li{max-width:42em}
 .post-card figure a{display:block}
 .post-card figure a img{transition:opacity .15s ease}
 .post-card figure a:hover img{opacity:.92}
+
+/* 文章页：目录 / 上下篇 / 作者卡 / 证据图（第三批整改） */
+.toc{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:18px 0 6px}
+.toc strong{display:block;margin-bottom:6px}
+.toc ol{margin:0;padding-left:22px}
+.toc li{margin:3px 0}
+article.post figure{margin:18px 0}
+article.post figure img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px}
+article.post figcaption{color:var(--muted);font-size:13.5px;margin-top:6px;line-height:1.6}
+.post-nav{border-top:1px solid var(--line);margin-top:30px;padding-top:16px}
+.post-nav-links{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+.related strong{display:block;margin-bottom:4px}
+.related ul{margin:4px 0;padding-left:20px}
+.updated{color:var(--muted);font-size:13px;margin:12px 0 0}
+.author-card{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-top:18px}
+.author-name{font-weight:700;font-size:16px}
+.author-card p{margin:6px 0 0}
+.rel-article{margin-top:10px}
