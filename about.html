@@ -21,8 +21,8 @@
 <meta name="twitter:image" content="https://bai265272-rgb.github.io/assets/og-default.png">
 <link rel="alternate" type="application/rss+xml" title="白士博的技术博客 RSS" href="feed.xml">
 <link rel="stylesheet" href="assets/style.css">
-<link rel="stylesheet" href="assets/patch.css">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
 <script type="application/ld+json">
 {
@@ -80,14 +80,24 @@
 
     <h2>联系我</h2>
     <ul>
-      <li>邮箱：baishibo2026@163.com</li>
+      <li>邮箱：<a id="mail" href="#" rel="nofollow">点此发邮件</a></li>
+<script>
+(function () {
+  var user = 'baishibo2026', domain = '163.com';
+  var a = document.getElementById('mail');
+  if (!a) return;
+  a.href = 'mailto:' + user + '@' + domain;
+  a.textContent = user + '@' + domain;
+})();
+</script>
+<noscript><li>邮箱：baishibo2026（at）163.com</li></noscript>
       <li>GitHub：<a href="https://github.com/bai265272-rgb" target="_blank" rel="noopener">github.com/bai265272-rgb</a></li>
     </ul>
   </article>
 </main>
 
 <footer class="site">
-  <div class="wrap">© 2026 白士博 · 网络工程 / 云运维 · 石家庄</div>
+  <div class="wrap">© 2026 白士博 · 网络工程 / 云运维 · 石家庄<br><a class="rss" href="/feed.xml">RSS 订阅</a></div>
 </footer>
 </body>
 </html>

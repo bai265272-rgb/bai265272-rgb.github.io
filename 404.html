@@ -6,8 +6,8 @@
 <title>页面不存在（404） — 白士博的技术博客</title>
 <meta name="description" content="你访问的页面不存在或已被移动。可以返回首页、查看作品集，或去 GitHub 逛逛。">
 <link rel="stylesheet" href="/assets/style.css">
-<link rel="stylesheet" href="/assets/patch.css">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 </head>
 <body>
 <a class="skip-link" href="#main">跳到正文</a>
@@ -32,11 +32,19 @@
       <a href="/portfolio.html">查看作品集</a> ·
       <a href="/about.html">关于我</a>
     </p>
+    <div class="related" style="margin-top:28px;text-align:left;display:inline-block">
+      <strong>最近的文章</strong>
+      <ul>
+        <li><a href="/posts/nginx-keepalived-haproxy-ha.html">Nginx + Keepalived + HAProxy 高可用实测：停掉主节点之后发生了什么</a></li>
+        <li><a href="/posts/enterprise-network-training.html">企业网络实训复盘：从 VLAN 规划到防火墙安全策略</a></li>
+        <li><a href="/posts/kubernetes-offline-3-pits.html">离线部署 Kubernetes 双节点集群，我踩的 3 个坑</a></li>
+      </ul>
+    </div>
   </section>
 </main>
 
 <footer class="site">
-  <div class="wrap">© 2026 白士博 · 网络工程 / 云运维 · 石家庄<br>本站为静态页面，托管于 GitHub Pages</div>
+  <div class="wrap">© 2026 白士博 · 网络工程 / 云运维 · 石家庄<br>本站为静态页面，托管于 GitHub Pages<br><a class="rss" href="/feed.xml">RSS 订阅</a></div>
 </footer>
 </body>
 </html>
