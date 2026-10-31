@@ -96,7 +96,12 @@
       <li><strong>Samba</strong>：打通 Windows 与 Linux 之间的文件共享，并完成跨系统挂载验证。</li>
     </ul>
 
-    <h2 id="sec-4">第四步：Web 服务与高可用</h2>
+        <p>主 DNS 的关键改动就两处（摘自实训报告原文）：把 named 的监听和查询范围从"只对本机"放开，否则局域网里其他机器根本问不到它。</p>
+    <pre><code># /etc/named.conf（主 DNS 服务器）
+listen-on port 53 { any; };    # 改前：127.0.0.1，只听本机
+allow-query     { any; };      # 改前：localhost，只答本机</code></pre>
+
+<h2 id="sec-4">第四步：Web 服务与高可用</h2>
     <p>对外服务用 Nginx 反向代理 + Keepalived 双机热备，对外只暴露一个 VIP；另外写了运维脚本自动拉起异常退出的服务，并做了轮询分发验证。这套高可用的故障验证细节我单独写了一篇：<a href="nginx-keepalived-haproxy-ha.html">《Nginx + Keepalived + HAProxy 高可用实测》</a>。</p>
 
     <figure><a href="../assets/img/p2-nginx-dynamic.jpg" target="_blank" rel="noopener"><img src="../assets/img/p2-nginx-dynamic.webp" alt="浏览器访问动态服务器页面显示连接成功（地址已打码），另一标签页为 MySQL 连接测试页" loading="lazy" width="858" height="564"></a><figcaption>第四步的证据：经 Nginx 反向代理访问动态服务器与 MySQL 连接测试页均返回成功（地址已打码）</figcaption></figure>

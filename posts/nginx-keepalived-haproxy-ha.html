@@ -82,13 +82,47 @@
 <h2 id="sec-1">架构分工</h2>
     <table>
       <tr><th>组件</th><th>职责</th></tr>
-      <tr><td>Keepalived</td><td>维护虚拟 IP（VIP）192.168.36.200，主节点故障时把 VIP 漂移到备节点</td></tr>
+      <tr><td>Keepalived</td><td>维护虚拟 IP（VIP）192.168.36.100，主节点故障时把 VIP 漂移到备节点</td></tr>
       <tr><td>HAProxy</td><td>对后端做轮询分发，并持续健康检查，自动摘除故障后端</td></tr>
       <tr><td>Nginx</td><td>实际提供 Web 服务的后端（源码编译部署），同时做反向代理</td></tr>
     </table>
     <p>HAProxy 的健康检查参数用的是 <code>inter 2000 fall 3 rise 2</code>：每 2 秒检查一次，连续 3 次失败判定后端下线，连续 2 次成功才重新上线。这个参数组合的意思是“宁可慢一点摘除，也不要因为一次网络抖动就误杀后端”。</p>
 
-    <h2 id="sec-2">验证一：停掉主节点的 Keepalived</h2>
+        <p>主节点的 keepalived.conf（摘自实训报告原文，认证口令已隐去）：</p>
+    <pre><code>! Configuration File for keepalived
+
+global_defs {
+    router_id nginx_master_132
+}
+
+vrrp_script check_nginx {
+    script "/usr/bin/systemctl is-active nginx"
+    interval 2
+    weight -20
+    fall 2
+    rise 2
+}
+
+vrrp_instance nginx_vip {
+    state MASTER
+    interface ens160
+    virtual_router_id 50
+    priority 100
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass ********
+    }
+    virtual_ipaddress {
+        192.168.36.100/24 dev ens160
+    }
+    track_script {
+        check_nginx
+    }
+}</code></pre>
+    <p>备节点只有三处不同：router_id 改为 nginx_backup_133、state 改为 BACKUP、priority 改为 90。关键在 vrrp_script：每 2 秒检查一次 Nginx，连续 2 次失败就把本机优先级扣 20 分——100 减 20 等于 80，低于备节点的 90，VIP 不等节点宕机就会自己漂移过去。下面的两次验证，验的就是这段配置。</p>
+
+<h2 id="sec-2">验证一：停掉主节点的 Keepalived</h2>
     <p><strong>操作：</strong>在主节点上停止 Keepalived 服务，持续访问 VIP 提供的 Web 服务。</p>
     <p><strong>结果：</strong>VIP 自动漂移到备节点，Web 访问短暂波动后恢复，用户侧感知不到节点已经换了一台。如果漂移失败，VIP 会成为一个谁都不响应的地址，整个验证的意义就在这里——不停一次，你永远不知道漂移脚本和优先级配置到底对不对。</p>
 
