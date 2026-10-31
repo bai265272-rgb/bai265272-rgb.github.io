@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>开博：为什么我要在 2026 年认真写技术博客 — 白士博的技术博客</title>
+<meta name="description" content="企业云数据中心运维实训的项目详情页：84 页实训报告的目录与结构、关键实施截图（网络拓扑、OSPF、MySQL 多实例、Zabbix 监控与告警），以及一段我做了什么、卡在哪、怎么解的复盘。">
+<link rel="canonical" href="https://bai265272-rgb.github.io/projects/p1.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="白士博的技术博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="企业云数据中心运维实训 · 项目详情 | 白士博">
+<meta property="og:description" content="84 页实训报告的目录、关键截图与复盘：三层组网、MySQL 多实例、Nginx 高可用、Zabbix 监控、FreeVM 虚拟化。">
+<meta property="og:url" content="https://bai265272-rgb.github.io/projects/p1.html">
+<meta property="og:image" content="https://bai265272-rgb.github.io/assets/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="企业云数据中心运维实训 · 项目详情 | 白士博">
+<meta name="twitter:description" content="84 页实训报告的目录、关键截图与复盘：三层组网、MySQL 多实例、Nginx 高可用、Zabbix 监控、FreeVM 虚拟化。">
+<meta name="twitter:image" content="https://bai265272-rgb.github.io/assets/og-default.png">
+<meta property="article:published_time" content="2026-10-30T09:00:00+08:00">
+<link rel="alternate" type="application/rss+xml" title="白士博的技术博客 RSS" href="../feed.xml">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "企业云数据中心运维实训",
+  "url": "https://bai265272-rgb.github.io/projects/p1.html",
+  "inLanguage": "zh-CN",
+  "author": {
+    "@type": "Person",
+    "name": "白士博",
+    "url": "https://bai265272-rgb.github.io/about.html",
+    "sameAs": [
+      "https://github.com/bai265272-rgb"
+    ]
+  },
+  "description": "84 页课程实训报告的公开详情页：目录与结构、关键实施截图和复盘。涵盖三层组网（VLAN/MSTP/VRRP/OSPF/双防火墙 HRP）、MySQL 多实例、Nginx+Keepalived+HAProxy 高可用、Zabbix 监控告警与 FreeVM 虚拟化。",
+  "image": "https://bai265272-rgb.github.io/assets/og-default.png"
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到正文</a>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">baishibo<span>.blog</span></a>
+    <nav class="main">
+      <a href="../index.html" aria-current="page">文章</a>
+      <a href="../portfolio.html" aria-current="page">作品集</a>
+      <a href="../about.html">关于我</a>
+      <a href="https://github.com/bai265272-rgb" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+  <article class="post">
+<article class="post">
+    <a class="back" href="../portfolio.html#p1">← 返回作品集</a>
+    <h1>企业云数据中心运维实训</h1>
+    <p class="meta">课程实训 · 84 页报告 · 独立完成 · 实施与测试完成于 2026 年 6 月</p>
+
+    <p>这是我做过体量最大的一次实训：从零搭一个小型云数据中心——三层网络打底，数据库拆多实例，Web 做高可用与负载均衡，全链路加监控，最后用虚拟化平台把物理资源池化。这一页放报告的目录、几张关键实施截图和一段复盘，作为"84 页报告"这句话的证据。</p>
+
+    <h2 id="sec-1">报告目录与结构</h2>
+        <figure><a href="../assets/img/p1-toc.jpg" target="_blank" rel="noopener"><img src="../assets/img/p1-toc.webp" alt="实训报告目录页：五章结构，末页为第 84 页" width="1233" height="1884" loading="lazy"></a><figcaption>报告目录页（原报告截图）。五章结构，实施章占第 5–77 页，测试章有五组独立测试，最后总结落在第 84 页。</figcaption></figure>
+    <table>
+      <thead><tr><th>部分</th><th>内容</th><th>页码</th></tr></thead>
+      <tbody>
+        <tr><td>一、项目介绍</td><td>背景、需求、目标</td><td>1</td></tr>
+        <tr><td>二、项目设计方案</td><td>项目拓扑图、IP 地址规划表</td><td>2–4</td></tr>
+        <tr><td>三、项目实施</td><td>网络搭建（5–50）；MySQL 多实例部署（51–53）；Nginx 源码安装与高可用部署（54–61）；Zabbix 监控 Web 与数据库服务（62–69）；FreeVM 虚拟化平台部署与创建虚拟机（70–77）</td><td>5–77</td></tr>
+        <tr><td>四、项目测试及结果展示</td><td>网络测试、数据库多实例测试、Nginx 高可用测试、Zabbix 监控测试、FreeVM 部署与虚拟机测试</td><td>78–83</td></tr>
+        <tr><td>五、项目总结</td><td>收获与不足</td><td>84</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="sec-2">关键截图</h2>
+        <figure><a href="../assets/img/p1-topology.jpg" target="_blank" rel="noopener"><img src="../assets/img/p1-topology.webp" alt="云数据中心网络拓扑：核心、汇聚、接入三层与双防火墙" width="1280" height="801" loading="lazy"></a><figcaption>网络拓扑（地址标注已打码）：核心—汇聚—接入三层，服务器区 / 存储区 / 管理区 / DMZ 分区，双防火墙在出口做主备。</figcaption></figure>
+        <figure><a href="../assets/img/p1-ospf.jpg" target="_blank" rel="noopener"><img src="../assets/img/p1-ospf.webp" alt="汇聚交换机 LSW1 的 OSPF 配置：silent-interface 与逐个放行的业务 VLAN" width="409" height="434" loading="lazy"></a><figcaption>汇聚层 OSPF 配置：先 silent-interface all 关掉所有接口的 OSPF 报文，再逐个放行业务 VLAN——放行清单和 IP 规划表逐项对齐，这是当时最容易漏的一项。</figcaption></figure>
+        <figure><a href="../assets/img/p1-mariadb.jpg" target="_blank" rel="noopener"><img src="../assets/img/p1-mariadb.webp" alt="MariaDB 实例变量查询：port 为 3308" width="1235" height="566" loading="lazy"></a><figcaption>MySQL 多实例验证：3308 实例的 show variables 结果。各实例用独立端口、socket 与数据目录，逐个实例查端口确认隔离生效。</figcaption></figure>
+        <figure><a href="../assets/img/p1-zabbix-items.jpg" target="_blank" rel="noopener"><img src="../assets/img/p1-zabbix-items.webp" alt="Zabbix 最新数据：PHP-FPM 进程数、PHP MySQL 连接状态等自定义监控项" width="2245" height="269" loading="lazy"></a><figcaption>Zabbix 自定义监控项：PHP-FPM 进程数、PHP 与 MySQL 的连接状态、内存与根分区、网卡收发速率——内置模板测不到的业务指标自己写采集。</figcaption></figure>
+        <figure><a href="../assets/img/p1-zabbix-alert.jpg" target="_blank" rel="noopener"><img src="../assets/img/p1-zabbix-alert.webp" alt="Zabbix 告警邮件：Apache 服务宕机，级别 High" width="451" height="222" loading="lazy"></a><figcaption>告警链路验证：主动停掉 Apache 后收到的告警邮件（级别 High）。监控不算完，能把告警发出来才算完。</figcaption></figure>
+
+    <h2 id="sec-3">复盘：我做了什么、卡在哪、怎么解的</h2>
+    <p><strong>做了什么。</strong>按"先网络、再服务、后监控与虚拟化"的顺序推进：网络层占了实施篇幅的一大半（第 5–50 页），VLAN 按服务器区 / 存储区 / 管理区 / DMZ 分区，汇聚层 MSTP 多实例分担链路、VRRP 做网关冗余，核心层 OSPF 自动发现路由，双防火墙 HRP 主备同步状态；服务层做了 MySQL 多实例隔离部署和 Nginx + Keepalived + HAProxy 的高可用与负载均衡；监控层用 Zabbix 把 Web、数据库和主机指标全量接进来并打通邮件告警；最后在 FreeVM 上建集群、创建虚拟机并做在线迁移。每一层做完都在测试章里留了一组对应的验证，不是搭完就算完。</p>
+    <p><strong>卡点一：OSPF 的放行口径。</strong>为了不让无关接口泛洪 OSPF 报文，我用了 silent-interface all 再逐个 undo 业务 VLAN 的写法，代价是漏放一个网段，那一段就整段不通，还不好定位。解法是笨办法但管用：每台设备配置后立刻 dis this，把放行清单和设计阶段的 IP 规划表逐项打勾对齐（上面的 OSPF 截图就是核对时的配置）。这件事让我养成了"先规划表、后敲配置"的顺序。</p>
+    <p><strong>卡点二：Keepalived 只停服务不漂移。</strong>最初的配置在节点宕机时能漂移，但只停掉 Nginx 进程时 VIP 不走、访问直接失败。后来把健康检查改成监控服务本身的 vrrp_script，并把扣分幅度算好（主节点 100 分扣 20 到 80，低于备机的 90 才触发漂移），停进程、停节点、停后端三种故障都实测通过。这段完整的配置和实测过程我单独写成了博客文章：<a href="../posts/nginx-keepalived-haproxy-ha.html">Nginx + Keepalived + HAProxy 高可用实测</a>。</p>
+    <p><strong>卡点三：Zabbix 测不到业务指标。</strong>内置模板只有主机层面的 CPU、内存，而我真正关心的是 PHP-FPM 还活着几个进程、PHP 到 MySQL 的连接通不通。这两个指标只能自己写 UserParameter 采集，再配触发器。最后用"主动停掉 Apache"做了一次端到端告警测试，收到 High 级别邮件才确认这条链路是真的通的（见上方截图）。</p>
+    <p><strong>一句话总结。</strong>这个项目教会我的不是某个命令，而是一套节奏：规划先行、逐层验证、出问题先看状态表（STP 状态、HAProxy 统计页、show variables）再动配置。</p>
+
+    <h2 id="sec-4">关于完整报告</h2>
+    <p>完整报告包含实验环境的地址规划与设备配置全文，不在网上公开。需要查阅的话，可以在面试时当面屏幕共享展示；也可以先通过<a href="../about.html">关于我</a>页面的邮箱联系我说明用途。</p>
+
+    <p class="updated">最后更新于 2026-10-31</p>
+    <div class="author-card">
+      <div class="author-name">白士博</div>
+      <p>2027 届网络工程本科在读，持 H3CNE-RS+ 与 H3CSE-RS-RT 双认证。这里只写自己真正动手做过的东西。</p>
+      <p><a href="../about.html">关于我</a> · <a href="../portfolio.html">作品集</a> · <a href="https://github.com/bai265272-rgb" target="_blank" rel="noopener">GitHub</a></p>
+    </div>
+</article>
+</main>
+
+<footer class="site">
+  <div class="wrap">© 2026 白士博 · 网络工程 / 云运维 · 石家庄<br><a class="rss" href="/feed.xml">RSS 订阅</a></div>
+</footer>
+</body>
+</html>
