@@ -6,7 +6,7 @@
 
 ## 目录结构
 
-- `index.html` / `about.html` / `portfolio.html` — 首页、关于、作品集
+- `index.html` / `portfolio.html` — 首页、作品集
 - `posts/` — 博客文章
 - `projects/` — 项目详情页（报告目录、关键截图与复盘）
 - `assets/` — 全站样式与图片（图片使用 WebP）
